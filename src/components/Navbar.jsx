@@ -16,8 +16,8 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 w-full bg-white/60 z-50 shadow-sm backdrop-blur-md">
-      <div className="flex items-center justify-between px-4 py-3">
+    <nav className="fixed top-0 w-full bg-white/10 z-50 shadow-sm h-15 ">
+      <div className="flex items-center justify-between px-4 py-3 h-full">
         {/* Always-visible hamburger */}
        {!isOpen ? (<button
           className="text-orange-500 text-2xl"
