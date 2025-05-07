@@ -1,1 +1,49 @@
 @import "tailwindcss";
+
+#root {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center; 
+  }
+  .debug * {
+    outline: 1px solid red !important;
+  }
+  
+  @import "tailwindcss";
+  
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  
+  .footer-banner {
+    height: 337px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  @media (max-width: 1023px) {
+    .footer-banner {
+      background-position: right;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .footer-banner {
+      background-position: 75% center;
+      height: 260px; /* Reducción en tabletas */
+    }
+  }
+  
+  @media (max-width: 639px) {
+    .footer-banner {
+      background-position: 90% center;
+      height: 200px; /* Menor altura en móviles */
+    }
+  }
+  
+  
