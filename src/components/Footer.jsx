@@ -7,7 +7,7 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import footerBanner from "../assets/Frame 34631.svg";
-import logoSmall from "../assets/LOGO DOS (1).png";
+import logoSmall from "../assets/logo2.png";
 
 
 export default function Footer() {
