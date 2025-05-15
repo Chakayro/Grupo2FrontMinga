@@ -1,0 +1,183 @@
+.manga-carousel-container {
+    background-color: #FF6600; /* Color naranja de fondo como en tu imagen */
+    padding: 40px 20px; /* Espaciado interno, ajusta según sea necesario */
+    position: relative; /* Necesario para posicionar flechas personalizadas si las usas externamente */
+    border-radius: 8px; /* Opcional: bordes redondeados */
+    width: 94%; /* Ajusta el ancho máximo según tu diseño */
+    height: 50vh;
+    margin: 70px auto; /* Centrar el carrusel */
+    overflow: visible; /* Permite que los elementos hijos sobresalgan */
+}
+
+.myMangaSwiper {
+    overflow: visible;
+    /* Puedes ajustar el alto si es necesario, o dejar que el contenido lo defina */
+}
+
+.manga-slide {
+    /* Estilos para cada slide individual */
+    display: flex; /* Para alinear imagen y texto */
+    align-items: center; /* Centrar verticalmente el contenido del slide */
+    justify-content: center;
+    min-height: 400px; /* Altura mínima para el slide, ajusta esto */
+    box-sizing: border-box;
+    position: relative;
+    top: -70px;
+}
+
+.slide-content-wrapper {
+    display: flex;
+    flex-direction: row; /* Imagen a la izquierda, texto a la derecha */
+    align-items: center;
+    justify-content: space-between; /* O 'flex-start' y dar márgenes */
+    width: 100%;
+    max-width: 900px; /* Controla el ancho del contenido dentro del slide */
+    padding: 20px;
+    gap: 30px; /* Espacio entre la imagen y el texto */
+    position: relative;
+}
+
+.slide-image-container {
+    flex: 0 0 40%; /* La imagen ocupa el 40% del espacio, ajusta */
+    width: 18dvw; /* Ancho fijo */
+    height: 55dvh; /* Alto fijo */
+    position: absolute;
+    transform: translateY(-10%); /* Moueve la imagen hacia arriba un 50% */
+    z-index: 2; /* Asegura que la imagen esté por encima */
+}
+
+.slide-image-container img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 8px; /* Bordes redondeados para la imagen */
+    object-fit: cover; /* Cambiado de 'contain' a 'cover' para llenar el espacio */
+}
+
+.slide-text-container {
+    flex: 1; /* El texto ocupa el espacio restante */
+    color: white; /* Texto blanco como en la imagen */
+    text-align: left;
+    padding-left: 45%; /* Dar espacio para la imagen */
+    position: relative;
+    z-index: 1;
+}
+
+.slide-text-container h2 {
+    font-size: 2rem; /* Ajusta el tamaño del título */
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.slide-text-container p {
+    font-size: 1rem; /* Ajusta el tamaño de la descripción */
+    line-height: 1.6;
+}
+.category {
+    font-size: 0.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra suave */
+    color: white;
+}
+
+.title {
+    font-size: 0.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+/* Estilizando los botones de navegación por defecto de Swiper */
+/* Los botones por defecto de Swiper se añaden dentro del contenedor de Swiper */
+.myMangaSwiper .swiper-button-prev,
+.myMangaSwiper .swiper-button-next {
+    background-color: rgba(255, 255, 255, 0.3); /* Fondo semi-transparente */
+    color: #FF6600; /* Color de la flecha (naranja) */
+    border-radius: 50%;
+    width: 40px; /* Ancho del botón */
+    height: 40px; /* Alto del botón */
+    transition: background-color 0.3s ease;
+}
+
+.myMangaSwiper .swiper-button-prev:hover,
+.myMangaSwiper .swiper-button-next:hover {
+    background-color: rgba(255, 255, 255, 0.6); /* Más opaco al pasar el mouse */
+}
+
+/* Ajusta el tamaño del icono de la flecha */
+.myMangaSwiper .swiper-button-prev::after,
+.myMangaSwiper .swiper-button-next::after {
+    font-size: 18px !important; /* '!important' a veces es necesario para sobrescribir Swiper */
+    font-weight: bold;
+}
+
+/* Posicionamiento de los botones (ajusta según tu imagen) */
+/* La imagen muestra botones pequeños y redondos en los bordes del contenedor naranja */
+.myMangaSwiper .swiper-button-prev {
+    left: 15px; /* Distancia desde la izquierda */
+}
+
+.myMangaSwiper .swiper-button-next {
+    right: 15px; /* Distancia desde la derecha */
+}
+
+/* Personalización de los botones de navegación */
+.manga-carousel-container .swiper-button-prev,
+.manga-carousel-container .swiper-button-next {
+    top: 40%; /* Ajusta este valor para subir o bajar los botones */
+    transform: translateY(-50%);
+    color: white; /* Color de las flechas */
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Ajusta el tamaño del ícono dentro del botón */
+.manga-carousel-container .swiper-button-prev::after,
+.manga-carousel-container .swiper-button-next::after {
+    font-size: 20px;
+}
+
+/* Efecto hover */
+.manga-carousel-container .swiper-button-prev:hover,
+.manga-carousel-container .swiper-button-next:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .manga-carousel-container {
+        padding: 20px; /* Reduce el padding para pantallas pequeñas */
+        height: 60vh; /* Ajusta la altura del contenedor */
+    }
+    slide-image-container {
+        width: 50%;
+        height: 80%;
+        position: fixed;
+        top: 140px; 
+        z-index: -1;/* Fija la imagen en la parte superior */
+    }
+}
+
+/* Ajustes adicionales para dispositivos muy pequeños */
+@media (max-width: 480px) {
+    .manga-carousel-container{
+        padding: 10px; /* Reduce el padding para pantallas pequeñas */
+        height: 45vh;
+    }
+    .slide-image-container {
+        width: 50%;
+        height: 80%;
+        position: fixed;
+        top: 140px; 
+        z-index: -1;/* Fija la imagen en la parte superior */
+    }
+    .slide-text-container {
+        padding: 1rem;
+        position: relative;
+        top: 150px;
+        
+    }
+    
+}
