@@ -1,9 +1,9 @@
 import BgUp from "../components/BgUp";
-function Home() {
+function Panel() {
   return (
     <div>
       <BgUp></BgUp>
     </div>
   );
 }
-export default Home;
+export default Panel;

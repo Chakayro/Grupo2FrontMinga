@@ -4,6 +4,7 @@ import MainLayout from './Layouts/MainLayout'
 import Home from './Pages/Home'
 import Login from './Pages/Users/Login'
 import Register from './Pages/Users/Register'
+import Panel from './Pages/Panel'
 
 function App() {
   
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
       {path:"/home", element: <Home/>},
       {path:"/login", element: <Login/>},
       {path:"/register", element: <Register/>},
-      //Aca iran el resto de las rutas que se vayan creando
+      {path:"/panel", element: <Panel/>},
 
     ]
   }

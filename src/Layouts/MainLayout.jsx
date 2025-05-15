@@ -7,9 +7,9 @@ const MainLayout = () => {
     //Mas adelante se crearan las rutas protegidas pero está la base
   return (
     <>
-      <Navbar></Navbar>
+      {/* <Navbar></Navbar> */}
       <Outlet></Outlet>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </>
   );
 };
