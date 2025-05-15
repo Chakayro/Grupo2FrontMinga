@@ -5,6 +5,9 @@ import Home from './Pages/Home'
 import Login from './Pages/Users/Login'
 import Register from './Pages/Users/Register'
 import Panel from './Pages/Panel'
+import Mangas from './Pages/Mangas'
+import Manager from './Pages/Manager'
+import Author from './pages/Author'
 
 function App() {
   
@@ -16,6 +19,9 @@ const router = createBrowserRouter([
       {path:"/login", element: <Login/>},
       {path:"/register", element: <Register/>},
       {path:"/panel", element: <Panel/>},
+      {path:"/mangas", element: <Mangas/>},
+      {path:"/manager", element: <Manager/>},
+      {path:"/author", element: <Author/>},
 
     ]
   }

@@ -1,9 +1,10 @@
 // src/data/data.js
-// Asegúrate de que las rutas a tus imágenes sean correctas desde la ubicación de este archivo.
-// Por ejemplo, si data.js está en src/data/ y tus imágenes en src/assets/.
 import HomeImage from "../assets/bgHome.png";
 import PanelImage from "../assets/bgPanel.png";
-// Importa aquí otras imágenes que necesites
+import MangasImage from "../assets/bgMangas.png";
+import ManagerImage from "../assets/bgManager.png";
+import AuthorImage from "../assets/bgAuthor.png";
+
 
 const data = {
   pages: [
@@ -17,12 +18,21 @@ const data = {
       photo: PanelImage,
       description: "Fondo para la página del panel"
     },
-    // Puedes añadir más objetos de página aquí
-    // {
-    //   id: "contacto",
-    //   photo: ContactoImage,
-    //   description: "Fondo para la página de contacto"
-    // },
+    {
+      id: "mangas", // Este ID se usará para coincidir con la ruta, ej: /manga
+      photo: MangasImage,
+      description: "Fondo para la página de manga"
+    },
+    {
+      id: "manager", // Este ID se usará para coincidir con la ruta, ej: /manager
+      photo: ManagerImage,
+      description: "Fondo para la página de manager"
+    },
+    {
+      id: "author", // Este ID se usará para coincidir con la ruta, ej: /author
+      photo: AuthorImage,
+      description: "Fondo para la página de autor"
+    },
   ],
 };
 
