@@ -12,7 +12,7 @@ import logoSmall from "../assets/logo2.png";
 
 export default function Footer() {
   return (
-    <footer className="w-full">
+    <footer className="-bottom-12/12 absolute w-full ">
       {/* Banner responsive con clase personalizada */}
       <div
         className="footer-banner"
