@@ -1,9 +1,10 @@
-function BgBt () {
-  return (
-    <div className="absolute w-full  h-6/12  bottom-0">
-        <div className="h-full mx-9 bg-white rounded-t-xl"></div>
-    </div>
-  );
+function BgBt({ children }) {
+return (
+    <div className="absolute w-11/12 h-5/12 sm:h-6/12 bg-white rounded-t-xl shadow-lg">
+{children} 
+        </div>
+);
 }
 
 export default BgBt;
+
