@@ -5,6 +5,7 @@ import FormLayout from './Layouts/FormLayout'
 import Home from './Pages/Home'
 import Login from './Pages/Users/Login'
 import Register from './Pages/Users/Register'
+import PrivateRoute from './components/privateRouter'
 
 function App() {
   
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <FormLayout/>,
     children: [
-      {path:"/login", element: <Login/>},
+      {path:"/login", element: <PrivateRoute><Login/></PrivateRoute>},
       {path:"/register", element: <Register/>},
       //Aca iran el resto de las rutas que se vayan creando
     ]
@@ -37,6 +38,6 @@ const router = createBrowserRouter([
     </>
   )
 }
-     
+
 
 export default App
