@@ -1,7 +1,6 @@
 // pages/Home.jsx
 import React from 'react';
 import HeroImagen from '../components/HeroImagen.jsx';
-import GenreSlider from '../components/Carrusel.jsx';
 import backgroundPrincipal from "../assets/backgroundPrincipal.png";
 import MangaCarousel from '../components/Slide.jsx';
 
