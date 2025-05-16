@@ -9,13 +9,15 @@ function BgUp() {
 
 
     return (
-        <div className="w-full h-2/12">
+        <>
             <img
                 src={currentPageData.photo}
                 alt={currentPageData.description || `Fondo para ${pageId}`}
-                className="absolute h-8/12 w-full object-cover"
+                className=" h-full w-full object-cover"
             />
-        </div>
+
+           
+        </>
     );
 }
 
