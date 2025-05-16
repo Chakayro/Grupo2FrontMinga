@@ -48,8 +48,8 @@ const MangaCarousel = ({ slides }) => {
               <div className="text-container
                 absolute text-white gap-1 pb-2 h-full w-full
                 md:relative md:w-1/2 flex flex-col justify-end lg:justify-center
-                lg:static lg:w-1/2 lg:h-[50vh] lg:overflow-hidden lg:z-20
-                lg:items-start lg:text-left lg:translate-x-82">
+                lg:static lg:w-[45%] lg:h-[50vh] lg:overflow-hidden lg:z-20
+                lg:items-start lg:text-left lg:translate-x-50 xl:translate-x-75">
                 <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-wide drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                   {manga.category_id?.toUpperCase() || 'SIN CATEGORÍA'}
                 </h2>
