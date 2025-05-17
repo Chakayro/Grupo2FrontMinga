@@ -1,167 +1,140 @@
+// src/components/TableComponent.jsx
 import React, { useState } from 'react';
-import Users from '../assets/Users.png'; // Asegúrate que la ruta es correcta
-import RedTeamImg from '../assets/redteam.jpg'; // Renombrado para claridad
-import BlueTeamImg from '../assets/blueteam.jpg'; // Renombrado para claridad
-import OrangeTeamImg from '../assets/orangeteam.jpg'; // Renombrado para claridad
-import PurpleTeamImg from '../assets/purpleteam.jpg'; // Renombrado para claridad
+import Users from '../assets/Users.png'; 
+import RedTeamImg from '../assets/redteam.jpg'; 
+import BlueTeamImg from '../assets/blueteam.jpg'; 
+import OrangeTeamImg from '../assets/orangeteam.jpg';
+import PurpleTeamImg from '../assets/purpleteam.jpg';
 
-// Componente Interruptor (simulado)
-const ToggleSwitch = ({ enabled }) => {
-  const [isEnabled, setIsEnabled] = useState(enabled);
-  return (
-    <button
-      onClick={() => setIsEnabled(!isEnabled)}
-      className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors duration-200 ease-in-out focus:outline-none ${
-        isEnabled ? 'bg-orange-500' : 'bg-gray-300'
+const ToggleSwitch = ({ enabled, onToggle }) => (
+  <button
+    onClick={onToggle}
+    className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors duration-200 ease-in-out focus:outline-none ${
+      enabled ? 'bg-orange-500' : 'bg-gray-300'
+    }`}
+  >
+    <span
+      className={`inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-200 ease-in-out ${
+        enabled ? 'translate-x-6' : 'translate-x-1'
       }`}
-    >
-      <span
-        className={`inline-block w-4 h-4 transform bg-white rounded-full transition-transform duration-200 ease-in-out ${
-          isEnabled ? 'translate-x-6' : 'translate-x-1'
-        }`}
-      />
-    </button>
-  );
-};
+    />
+  </button>
+);
+
+// Clases comunes para mantener consistencia y facilitar ajustes de tamaño
+const commonCellClasses = "px-4 sm:px-5 py-1 whitespace-nowrap text-sm"; 
+const iconInCellClasses = "w-4 h-4 sm:w-6 sm:h-6 mr-2 sm:mr-3";
+const logoInCellClasses = "w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"; // Para logos y avatares
 
 const TableComponent = () => {
-  const [activeTab, setActiveTab] = useState('companies'); // 'companies' o 'authors'
+  const [activeTab, setActiveTab] = useState('companies');
+  
+  const [companies, setCompanies] = useState([
+    { id: 1, name: 'Blue Team', website: 'www.blueteam.com', teamLogo: BlueTeamImg, active: true },
+    { id: 2, name: 'Red Team', website: 'www.redteam.com', teamLogo: RedTeamImg, active: true },
+    { id: 3, name: 'Orange Team', website: 'www.orangeteam.com', teamLogo: OrangeTeamImg, active: true },
+    { id: 4, name: 'Purple Team', website: 'www.purpleteam.com', teamLogo: PurpleTeamImg, active: true },
+  ]);
+
+  const [authors, setAuthors] = useState([
+   
+    { id: 1, name: 'Lucas Silva', date: '16/02/2000', location: 'Caseros', avatarUrl: 'https://thispersondoesnotexist.com/', active: true },
+    { id: 2, name: 'Alejo Villafañe', date: '11/06/1981', location: 'CABA', avatarUrl: 'https://thispersondoesnotexist.com/', active: true },
+    { id: 3, name: 'Ignacio Borraz', date: '25/04/1990', location: 'Cordoba', avatarUrl: 'https://thispersondoesnotexist.com/', active: false },
+    { id: 4, name: 'Eric Rodriguez 👽', date: '04/01/2000', location: 'Corrientes', avatarUrl: 'https://thispersondoesnotexist.com/', active: true },
+  ]);
+
+  const handleCompanyToggle = (companyId) => {
+    setCompanies(prevCompanies => 
+      prevCompanies.map(company => 
+        company.id === companyId ? { ...company, active: !company.active } : company
+      )
+    );
+  };
+
+  const handleAuthorToggle = (authorId) => {
+    setAuthors(prevAuthors =>
+      prevAuthors.map(author => 
+        author.id === authorId ? { ...author, active: !author.active } : author
+      )
+    );
+  };
 
   return (
-    <div className="w-full max-w-xl "> {/* Manteniendo la restricción de ancho original */}
-      <div className="bg-gray-100 shadow-lg rounded-lg  overflow-hidden border border-gray-300">
-        {/* Pestañas de Encabezado */}
+    <div className="w-full w-xl"> {/* Puedes ajustar max-w-xl, max-w-2xl, etc. */}
+      <div className="bg-gray-100 shadow-lg rounded-lg overflow-hidden border border-gray-300">
         <div className="flex border-b border-orange-600">
-          <button
-            onClick={() => setActiveTab('companies')}
-            className={`py-2 px-6 font-semibold text-xs focus:outline-none w-1/2 text-center transition-colors duration-150
-              ${activeTab === 'companies'
-                ? 'bg-orange-500 text-white rounded-tl-lg'
-                : 'text-orange-500 hover:bg-orange-50'
-              }`}
-          >
-            Companies
-          </button>
-          <button
-            onClick={() => setActiveTab('authors')}
-            className={`py-2 px-4 font-semibold text-xs focus:outline-none w-1/2 text-center transition-colors duration-150
-              ${activeTab === 'authors'
-                ? 'bg-orange-500 text-white rounded-tr-lg'
-                : 'text-orange-500 hover:bg-orange-50'
-              }`}
-          >
-            Authors
-          </button>
+          {/* Botones de Pestañas Optimizados */}
+          {[{id: 'companies', label: 'Companies'}, {id: 'authors', label: 'Authors'}].map((tabInfo, index) => (
+            <button
+              key={tabInfo.id}
+              onClick={() => setActiveTab(tabInfo.id)}
+              className={`py-2 px-6 font-semibold text-sm w-1/2 text-center transition-colors duration-150
+                ${activeTab === tabInfo.id ? 'bg-orange-500 text-white' : 'text-orange-500 hover:bg-orange-50'}
+                ${index === 0 && activeTab === tabInfo.id ? 'rounded-tl-lg' : ''}
+                ${index === 1 && activeTab === tabInfo.id ? 'rounded-tr-lg' : ''}
+              `}
+            >
+              {tabInfo.label}
+            </button>
+          ))}
         </div>
 
-        {/* Contenido de la Tabla */}
-        {activeTab === 'companies' && (
-          <div className="overflow-x-auto">
+        {/* Contenedor para las tablas (usando 'hidden') */}
+        <div>
+          {/* Tabla de Companies */}
+          <div className={`overflow-x-auto ${activeTab === 'companies' ? '' : 'hidden'}`}>
             <table className="min-w-full divide-y divide-gray-200">
               <tbody className="bg-gray-100 divide-y divide-gray-200">
-
-                <tr className="hover:bg-gray-10 transition-colors duration-150">
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap"> 
-                    <div className="flex items-center">
-                      <img src={Users} alt="Users Icon" className="w-4 h-4 sm:w-5 sm:h-5 mr-2 sm:mr-3" />
-                      <div className="text-xs font-medium text-gray-900">Blue Team</div>
-                    </div>
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap text-xs text-gray-600">
-                    www.blueteam.com
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap hidden sm:table-cell">
-                    <img
-                      src={BlueTeamImg}
-                      alt="Blue Team Logo"
-                      className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
-                    />
-                   
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap"> 
-                     <div className=''></div>
-                    <ToggleSwitch enabled={true} />
-                  </td>
-                </tr>
-
-
-                <tr className="hover:bg-gray-50 transition-colors duration-150">
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <img src={Users} alt="Users Icon" className="w-5 h-5 sm:w-5 sm:w-5 mr-2 sm:mr-3" />
-                      <div className="text-xs font-medium text-gray-900">Red Team</div>
-                    </div>
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap text-xs text-gray-600">
-                    www.redteam.com
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap hidden sm:table-cell">
-                    <img
-                      src={RedTeamImg}
-                      alt="Red Team Logo"
-                      className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
-                    />
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap">
-                    <ToggleSwitch enabled={true} />
-                  </td>
-                </tr>
-
-
-                <tr className="hover:bg-gray-50 transition-colors duration-150">
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap"> 
-                    <div className="flex items-center">
-                      <img src={Users} alt="Users Icon" className="w-5 h-5 sm:w-5 sm:w-5 mr-2 sm:mr-3" />
-                      <div className="text-xs font-medium text-gray-900">Orange Team</div>
-                    </div>
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap text-xs text-gray-600"> 
-                    www.orangeteam.com
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap hidden sm:table-cell">
-                    <img
-                      src={OrangeTeamImg}
-                      alt="Orange Team Logo"
-                      className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
-                    />
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap">
-                    <ToggleSwitch enabled={true} />
-                  </td>
-                </tr>
-
-
-                <tr className="hover:bg-gray-50 transition-colors duration-150">
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <img src={Users} alt="Users Icon" className="w-5 h-5 sm:w-5 mr-2 sm:mr-3" />
-                      <div className="text-xs font-medium text-gray-900">Purple Team</div>
-                    </div>
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap text-xs text-gray-600">
-                    www.purpleteam.com
-                  </td>
-                  <td className="px-4 sm:px-5 py-0.5 whitespace-nowrap hidden sm:table-cell">
-                    <img
-                      src={PurpleTeamImg}
-                      alt="Purple Team Logo"
-                      className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
-                    />
-                  </td>
-                  <td className="px-0 sm:px-5 py-0.5 whitespace-nowrap">
-                    <ToggleSwitch enabled={true} />
-                  </td>
-                </tr>
+                {companies.map((company) => (
+                  <tr key={`company-${company.id}`} className="hover:bg-gray-50 transition-colors duration-150">
+                    <td className={commonCellClasses}> 
+                      <div className="flex items-center">
+                        <img src={Users} alt="Users Icon" className={iconInCellClasses} />
+                        <div className="font-medium text-gray-900">{company.name}</div>
+                      </div>
+                    </td>
+                    <td className={`${commonCellClasses} text-gray-600`}>{company.website}</td>
+                    {/* Celda de Logo específica para Companies */}
+                    <td className={`${commonCellClasses} hidden sm:table-cell`}>
+                      <img src={company.teamLogo} alt={`${company.name} Logo`} className={logoInCellClasses} />
+                    </td>
+                    <td className={commonCellClasses}> 
+                      <ToggleSwitch enabled={company.active} onToggle={() => handleCompanyToggle(company.id)} />
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
-        )}
 
-        {activeTab === 'authors' && (
-          <div className="p-6 text-center">
-            <p className="text-gray-500">Contenido de Authors aquí.</p>
+          {/* Tabla de Authors */}
+          <div className={`overflow-x-auto ${activeTab === 'authors' ? '' : 'hidden'}`}>
+            <table className="min-w-full divide-y divide-gray-200">
+              <tbody className="bg-gray-100 divide-y divide-gray-200">
+                {authors.map((author) => ( 
+                  <tr key={`author-${author.id}`} className="hover:bg-gray-50 transition-colors duration-150">
+                    <td className={commonCellClasses}>
+                      <div className="flex items-center">
+                        <img src={Users} alt="User Icon" className={iconInCellClasses} />
+                        <div className="font-medium text-gray-900">{author.name}</div>
+                      </div>
+                    </td>
+                    {/* Celdas específicas para Authors */}
+                    <td className={`${commonCellClasses} text-gray-600`}>{author.date}</td>
+                    <td className={`${commonCellClasses} text-gray-600`}>{author.location}</td>
+                    <td className={commonCellClasses}> {/* Celda para Avatar */}
+                      <img src={author.avatarUrl} alt={`${author.name} Avatar`} className={logoInCellClasses} />
+                    </td>
+                    <td className={commonCellClasses}>
+                      <ToggleSwitch enabled={author.active} onToggle={() => handleAuthorToggle(author.id)} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

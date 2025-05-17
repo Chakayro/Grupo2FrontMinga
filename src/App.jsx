@@ -8,6 +8,7 @@ import Panel from './Pages/Panel'
 import Mangas from './Pages/Mangas'
 import Manager from './Pages/Manager'
 import Author from './pages/Author'
+import EditChapterPage from './pages/EditChapterPage'
 
 function App() {
   
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       {path:"/mangas", element: <Mangas/>},
       {path:"/manager", element: <Manager/>},
       {path:"/author", element: <Author/>},
+      {path:"/edit-chapter", element: <EditChapterPage/>},
 
     ]
   }

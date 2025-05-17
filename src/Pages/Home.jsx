@@ -1,10 +1,9 @@
 import BgUp from "../components/BgUp";
-import TableComponent from "../components/TableComponent";
 
 function Home() {
   return (
     <div className=" w-full h-screen bg-gray-100 ">
-     {/* <div className="absolute w-full h-screen sm:h-8/12 ">
+     <div className="absolute w-full h-screen sm:h-8/12 ">
       <BgUp/>
        <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
                 <div className="text-center md:text-left text-white px-4 ">
@@ -17,8 +16,7 @@ function Home() {
                     </button>
                 </div>
             </div>
-    </div>  */}
-    <TableComponent></TableComponent>
+    </div> 
     </div>
     
   );
