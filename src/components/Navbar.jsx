@@ -11,7 +11,7 @@ const Navbar = () => {
     { name: 'Register', path: '/register' },
     { name: 'Sign In', path: '/login' },
     { name: 'Company/Author', path: '/company' },
-    { name: 'Manga', path: '/manga' },
+    { name: 'Manga', path: '/mangas' },
     { name: 'Favorites', path: '/favorites' },
   ];
 
