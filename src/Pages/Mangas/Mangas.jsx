@@ -1,25 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import MangaImagen from "../../components/MangaImagen";
 import BackgroundMangas from "../../assets/mangasgeneral.png";
 import CategoryButton from "../../components/CategoryButton";
 import MangaCard from "../../components/PrintCardManga";
 
-const Mangas = () => {
-  const categories = [
-    { label: "All", color: "bg-gray-300", activeColor: "bg-gray-500" },
-    { label: "shonen", color: "bg-red-200", activeColor: "bg-red-500" },
-    { label: "seinen", color: "bg-orange-200", activeColor: "bg-orange-500" },
-    { label: "shojo", color: "bg-green-200", activeColor: "bg-green-500" },
-    { label: "comics", color: "bg-blue-200", activeColor: "bg-blue-500" },
-    
-  ];
-const textColorMap = {
-  "bg-gray-300": "text-gray-500",
-  "bg-red-200": "text-red-500",
-  "bg-orange-200": "text-orange-500",
-  "bg-green-200": "text-green-500",
-  "bg-blue-200": "text-blue-500",
-};
 
   const slidesData = [
     {
@@ -715,50 +699,92 @@ const textColorMap = {
         ]
     }
 ]
+const Mangas = () => {
+  const categories = [
+    { category_id: "All", color: "bg-gray-300", activeColor: "bg-gray-500" },
+    { category_id: "shonen", color: "bg-red-200", activeColor: "bg-red-500" },
+    { category_id: "seinen", color: "bg-orange-200", activeColor: "bg-orange-500" },
+    { category_id: "shojo", color: "bg-green-200", activeColor: "bg-green-500" },
+    { category_id: "comics", color: "bg-blue-200", activeColor: "bg-blue-500" },
+    
+  ];
+  
+const textColorMap = {
+  "bg-gray-300": "text-gray-500",
+  "bg-red-200": "text-red-500",
+  "bg-orange-200": "text-orange-500",
+  "bg-green-200": "text-green-500",
+  "bg-blue-200": "text-blue-500",
+};
 
-  const [selected, setSelected] = React.useState("All");
+//estados
+ const [selectedCategory, setSelectedCategory] = useState("All"); // <--- AGREGA ESTA LÍNEA
+  const [searchText, setSearchText] = useState("");
+
+  
+   // Filtrado cruzado por categoría y texto
+  const filteredMangas = slidesData.filter((manga) => {
+    // Filtro por categoría
+    const matchesCategory =
+      selectedCategory === "All" ||
+      (manga.category_id &&
+        manga.category_id.toLowerCase() === selectedCategory.toLowerCase());
+
+    // Filtro por texto (en título o descripción)
+    const matchesText =
+      manga.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      manga.description.toLowerCase().includes(searchText.toLowerCase());
+
+    // Ambos filtros deben cumplirse
+    return matchesCategory && matchesText;
+  });
+
 
   return (
     <>
       <div className="bg-gray-100 h-[85vh]">
         <MangaImagen imagenFondo={BackgroundMangas}>
-          <div className="absolute inset-0 flex flex-col items-center justify-start lg:justify-center translate-y-20 lg:translate-y-0">
+          <div className="absolute inset-0 flex flex-col items-center justify-start lg:justify-center translate-y-20 lg:-translate-y-25">
             <h1 className="text-5xl font-bold text-white">Mangas</h1>
             <input
               type="text"
               placeholder="🔍Find your manga here"
-              className="w-[73vw] max-w-4xl px-6 py-3 rounded-lg bg-white text-gray-700 text-lg shadow focus:outline-none translate-y-10 md:translate-y-15"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              className="w-[73vw] max-w-4xl px-6 py-3 rounded-lg bg-white text-gray-700 text-lg shadow focus:outline-none translate-y-10 md:translate-y-10"
             />
           </div>
         </MangaImagen>
       </div>
 
       <div className="relative z-10 w-full min-h-[60vh] bg-gray-200 rounded-t-[2.5rem] rounded-b-xl shadow p-4 mx-auto max-w-[100vw] -mt-60">
-        {/* Aquí irán las tarjetas de mangas */}
         <div className="contenedor-principal flex flex-col items-center gap-7">
           <div className="contenedor-categorias flex flex-row items-center justify-center gap-3 flex-wrap mb-6">
-            {categories.map((cat) => (
-              <CategoryButton
-                key={cat.label}
-                label={cat.label}
-                color={cat.color}
-                activeColor={cat.activeColor}
-                textColor={textColorMap[cat.color] || "text-gray-500"}
-                active={selected === cat.label}
-                onClick={() => setSelected(cat.label)}
-              />
-            ))}
-            {slidesData.map((manga) => (
-              <MangaCard
-                key={manga.title}
-                manga={manga}
-                categories={categories}
-              />
-            ))}
-          </div>
+      {categories.map((cat) => (
+        <CategoryButton
+          key={cat.category_id}
+          category_id={cat.category_id}
+          color={cat.color}
+          activeColor={cat.activeColor}
+          textColor={textColorMap[cat.color] || "text-gray-500"}
+          active={selectedCategory === cat.category_id}
+          onClick={() => setSelectedCategory(cat.category_id)} // <-- Selecciona la categoría
+        />
+      ))}
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+      {filteredMangas.map((manga) => (
+        <MangaCard
+          key={manga.title}
+          manga={manga}
+          categories={categories}
+        />
+      ))}
+    </div>
         </div>
       </div>
     </>
   );
 };
+
 export default Mangas;
