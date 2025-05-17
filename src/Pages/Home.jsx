@@ -706,36 +706,32 @@ const Home = () => {
     <div className="bg-gray-100 min-h-screen">
       {/* HeroImagen - con altura completa en móviles */}
       <div>
-      <HeroImagen imagenFondo={backgroundPrincipal}>
-      <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
-          <div className="text-center md:text-left text-white px-4 ">
-            <h1 className="text-5xl font-bold">For the love of manga</h1>
-            <p className="mt-2 text-2xl">Explore our varieties</p>
-            <p className="mt-1 text-sm font-bold mb-5">#MingaLove❤️</p>
-            
-            {!token ?
+        <HeroImagen imagenFondo={backgroundPrincipal}>
+          {/* Modifiqué esta clase para asegurar que ocupe toda la altura sin crear espacios extra */}
+          <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
+            <div className="text-center md:text-left text-white px-4">
+              <h1 className="text-5xl font-bold">For the love of manga</h1>
+              <p className="mt-2 text-2xl">Explore our varieties</p>
+              <p className="mt-1 text-sm font-bold mb-5">#MingaLove❤️</p>
+              
+              {!token ?
             (<Link to={"/login"}  className="mt-4 text-xl bg-white text-[#FF6600] font-bold px-6 py-2 rounded w-[200px] hover:bg-[#FF6600] hover:text-amber-50" >
-              Sign In!
-            </Link>)
+                Sign In!
+              </Link>)
             :
             (<Link   className="mt-4 text-xl bg-white text-[#FF6600] font-bold px-6 py-2 rounded w-[200px] hover:bg-[#FF6600] hover:text-amber-50" >
               Welcome!
             </Link>)
             }
-          </div>        
-      </div>
+            </div>        
+          </div>
         </HeroImagen>
       </div>
 
       {/* Carrusel visible solo en md+ */}
       <div>
-      {/* Otro contenido de tu página Home */}
-      
-      <MangaCarousel slides={slidesData} />
-      {/* Otro contenido */}
-    </div>
-
-
+        <MangaCarousel slides={slidesData} />
+      </div>
     </div>
   );
 };

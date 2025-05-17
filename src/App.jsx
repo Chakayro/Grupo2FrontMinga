@@ -6,8 +6,9 @@ import Home from './Pages/Home'
 import Login from './Pages/Users/Login'
 import Register from './Pages/Users/Register'
 import PrivateRoute from './components/privateRouter'
+import Mangas from './Pages/Mangas/Mangas'
 import axios from 'axios'
-import { use, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setUser } from './store/actions/authAction'
 
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     children: [
       {path:"/", element: <Home/>},
       {path:"/home", element: <Home/>},
+      {path:"/mangas", element: <Mangas/>},
       
       //Aca iran el resto de las rutas que se vayan creando
 
