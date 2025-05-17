@@ -6,9 +6,12 @@ import Home from './Pages/Home'
 import Login from './Pages/Users/Login'
 import Register from './Pages/Users/Register'
 import PrivateRoute from './components/privateRouter'
+import axios from 'axios'
+import { use, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setUser } from './store/actions/authAction'
 
-function App() {
-  
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +33,45 @@ const router = createBrowserRouter([
     ]
   }
 ])
+
+const loginWithToken = async (token)=> {
+  try {
+    const response = await axios.get('http://localhost:8000/api/auth/validateToken',{ 
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      return response.data.user;
+  } catch (error) {
+    console.error('Error validating token:', error);
+    return null;
+  }
+}
+function App() {
+const dispatch = useDispatch();
+
+  // Check if the token is present in localStorage and validate it
+useEffect(() => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    loginWithToken(token)
+      .then(user => {
+        if (user) {
+          dispatch(setUser({ user, token }));
+        }else{
+          console.error('Token no valido');
+          localStorage.removeItem('token');
+        }
+      })
+      .catch(error => {
+        console.error('Error durante la validacion:', error);
+        localStorage.removeItem('token');
+      });
+  }
+
+},[dispatch])
+
+
 
 
   return (

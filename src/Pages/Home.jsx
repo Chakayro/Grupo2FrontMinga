@@ -3,7 +3,8 @@ import React from 'react';
 import HeroImagen from '../components/HeroImagen.jsx';
 import backgroundPrincipal from "../assets/backgroundPrincipal.png";
 import MangaCarousel from '../components/Slide.jsx';
-
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const Home = () => {
   const slidesData = [
     {
@@ -700,7 +701,7 @@ const Home = () => {
     }
 ]
   
-
+ const token = useSelector((state) => state.auth.token);
   return (
     <div className="bg-gray-100 min-h-screen">
       {/* HeroImagen - con altura completa en móviles */}
@@ -710,11 +711,17 @@ const Home = () => {
           <div className="text-center md:text-left text-white px-4 ">
             <h1 className="text-5xl font-bold">For the love of manga</h1>
             <p className="mt-2 text-2xl">Explore our varieties</p>
-            <p className="mt-1 text-sm font-bold">#MingaLove❤️</p>
+            <p className="mt-1 text-sm font-bold mb-5">#MingaLove❤️</p>
             
-            <button className="mt-4 text-xl bg-white text-orange-500 font-bold px-6 py-2 rounded w-[200px]">
+            {!token ?
+            (<Link to={"/login"}  className="mt-4 text-xl bg-white text-[#FF6600] font-bold px-6 py-2 rounded w-[200px] hover:bg-[#FF6600] hover:text-amber-50" >
               Sign In!
-            </button>
+            </Link>)
+            :
+            (<Link   className="mt-4 text-xl bg-white text-[#FF6600] font-bold px-6 py-2 rounded w-[200px] hover:bg-[#FF6600] hover:text-amber-50" >
+              Welcome!
+            </Link>)
+            }
           </div>        
       </div>
         </HeroImagen>

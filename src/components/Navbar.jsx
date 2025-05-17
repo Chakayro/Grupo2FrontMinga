@@ -2,17 +2,26 @@ import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import logo2 from '../assets/logo2.png'; // Adjust the path as necessary
 import { NavLink } from 'react-router-dom';
+import { useSelector,  useDispatch } from 'react-redux';
+import { logout } from '../store/actions/authAction';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
 
+  const handleLogout = () => {
+    dispatch(logout());
+    localStorage.removeItem('token');
+  }
   const routes = [
-    { name: 'Home', path: '/' },
-    { name: 'Register', path: '/register' },
-    { name: 'Sign In', path: '/login' },
-    { name: 'Company/Author', path: '/company' },
-    { name: 'Manga', path: '/manga' },
-    { name: 'Favorites', path: '/favorites' },
+
+    { name: 'Home', path: '/', type: "public" },
+    { name: 'logIn', path: '/login', type:"public" },
+    { name: "LogOut", path:null,  type:"auth"},
+    { name: 'Company/Author', path: '/company', type:"private" },
+    { name: 'Manga', path: '/manga', type:"public" },
+    { name: 'Favorites', path: '/favorites', type:"private" },
   ];
 
   return (
@@ -44,17 +53,49 @@ const Navbar = () => {
 >
 
           <div className=" flex flex-col  mt-10 p-8">
-          {routes.map((route) => (
-            <NavLink
-            to={route.path}
+          {routes.map((route) => {
+           if(!token && route.type === "public"){
+            return(
+              <NavLink
+              to={route.path}
+              key={route.name}
+              href={route.path}
+              onClick={() => setIsOpen(false)}
+              className="text-lg font-medium hover:bg-amber-50 w-full p-2 hover:text-orange-500 text-center md:text-left ">
+              {route.name}
+            </NavLink>
+            )
+           }
+           if(token && route.type === "auth"){
+            return(
+              <NavLink
+              to={route.path}
+              key={route.name}
+              href={route.path}
+              onClick={() => {
+                handleLogout();
+                setIsOpen(false);
+              }}
+              className="text-lg font-medium hover:bg-amber-50 w-full p-2 hover:text-orange-500 text-center md:text-left "
+            >
+              {route.name}
+            </NavLink>
+            )
+           }
+           if(token && route.type === "private" || (route.type === "public" && route.name !== "logIn")){
+            return(<NavLink
+              to={route.path}
               key={route.name}
               href={route.path}
               onClick={() => setIsOpen(false)}
               className="text-lg font-medium hover:bg-amber-50 w-full p-2 hover:text-orange-500 text-center md:text-left "
             >
               {route.name}
-            </NavLink>
-          ))}
+            </NavLink>)
+           }
+
+           
+            })}
         </div>
       </div>
     </nav>
