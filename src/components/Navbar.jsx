@@ -49,6 +49,7 @@ const Navbar = () => {
             to={route.path}
               key={route.name}
               href={route.path}
+              onClick={() => setIsOpen(false)}
               className="text-lg font-medium hover:bg-amber-50 w-full p-2 hover:text-orange-500 text-center md:text-left "
             >
               {route.name}
