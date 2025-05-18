@@ -13,7 +13,7 @@ function BgUp() {
             <img
                 src={currentPageData.photo}
                 alt={currentPageData.description || `Fondo para ${pageId}`}
-                className=" h-full w-full object-cover"
+                className=" h-full w-full object-cover "
             />
 
            
