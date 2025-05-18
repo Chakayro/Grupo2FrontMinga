@@ -82,7 +82,7 @@ const Navbar = () => {
             </NavLink>
             )
            }
-           if(token && route.type === "private" || (route.type === "public" && route.name !== "logIn")){
+           if(token && (route.type === "private" ||  (route.type === "public" && route.name !== "Log In"))){
             return(<NavLink
               to={route.path}
               key={route.name}
