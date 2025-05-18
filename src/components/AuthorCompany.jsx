@@ -12,7 +12,7 @@ return (
         <img src={logo} alt="logo" className="h-10 w-auto mb-2" />
         <div className="space-y-4 w-full">
         <NavLink
-            //to="/author"
+            to="/newAuthor"
             onClick={() => setSelected("author")}
             className={`flex items-center justify-between border rounded-xl p-4 w-full transition ${
             selected === "author"
@@ -32,7 +32,7 @@ return (
         </NavLink>
 
         <NavLink
-            //to="/company"
+            to="/newCompany"
             onClick={() => setSelected("company")}
             className={`flex items-center justify-between border rounded-xl p-4 w-full transition ${
             selected === "company"

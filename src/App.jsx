@@ -12,6 +12,8 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { setUser } from './store/actions/authAction'
+import Author from './Pages/Users/NewAuthor'
+import Company from './Pages/Users/NewCompany'
 
 
 const router = createBrowserRouter([
@@ -32,7 +34,9 @@ const router = createBrowserRouter([
     children: [
       {path:"/login", element: <PrivateRoute><Login/></PrivateRoute>},
       {path:"/register", element: <Register/>},
-      {path:"/changeRol", element: <ChangeRol/>}
+      {path:"/changeRol", element: <ChangeRol/>},
+      {path:"/newAuthor", element: <Author/>},
+      {path:"/newCompany", element: <Company/>},
       //Aca iran el resto de las rutas que se vayan creando
     ]
   }
