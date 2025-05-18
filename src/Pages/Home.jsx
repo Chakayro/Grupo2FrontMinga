@@ -35,8 +35,8 @@ const Home = () => {
                 Sign In!
               </Link>)
             :
-            (<Link   className="mt-4 text-xl bg-white text-[#FF6600] font-bold px-6 py-2 rounded w-[200px] hover:bg-[#FF6600] hover:text-amber-50" >
-              Welcome!
+            (<Link to={"/manga"}  className="mt-4 text-xl bg-white text-[#FF6600] font-bold px-6 py-2 rounded w-[200px] hover:bg-[#FF6600] hover:text-amber-50" >
+              Get Started!
             </Link>)
             }
             </div>        
