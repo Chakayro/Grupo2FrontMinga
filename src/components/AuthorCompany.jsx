@@ -1,9 +1,8 @@
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
 import logo from '../assets/logo2.png';
 
 const RoleSelector = () => {
-const [selected, setSelected] = useState("company");
+
 
 return (
     <div className="w-full md:w-1/2 h-screen flex justify-center items-center">
@@ -13,12 +12,7 @@ return (
         <div className="space-y-4 w-full">
         <NavLink
             to="/newAuthor"
-            onClick={() => setSelected("author")}
-            className={`flex items-center justify-between border rounded-xl p-4 w-full transition ${
-            selected === "author"
-                ? "border-orange-500 ring-2 ring-[#FF6600]"
-                : "border-gray-100"
-            }`}
+            className={`flex items-center justify-between border rounded-xl p-4 w-full transition border-gray-100 hover:border-orange-500 hover:ring-2 hover:ring-[#FF6600]`}
         >
             <div className='w-8/10'>
             <h3 className="font-semibold text-orange-500">Join as an Author!</h3>
@@ -33,12 +27,7 @@ return (
 
         <NavLink
             to="/newCompany"
-            onClick={() => setSelected("company")}
-            className={`flex items-center justify-between border rounded-xl p-4 w-full transition ${
-            selected === "company"
-                ? "border-[#FF6600] ring-2 ring-[#FF6600]"
-                : "border-gray-100"
-            }`}
+            className={`flex items-center justify-between border rounded-xl p-4 w-full transition border-gray-100 hover:border-orange-500 hover:ring-2 hover:ring-[#FF6600]`}
         >
             <div className='w-8/10'>
             <h3 className="font-semibold text-[#FF6600]">Join as a Company!</h3>
