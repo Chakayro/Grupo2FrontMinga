@@ -51,7 +51,7 @@ const MangaCarousel = ({ slides }) => {
                 lg:static lg:w-[45%] lg:h-[50vh] lg:overflow-hidden lg:z-20
                 lg:items-start lg:text-left lg:translate-x-50 xl:translate-x-75">
                 <h2 className="text-lg md:text-2xl lg:text-3xl font-bold tracking-wide drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
-                  {manga.category_id?.toUpperCase() || 'SIN CATEGORÍA'}
+                  {manga.category_id.name?.toUpperCase() || 'SIN CATEGORÍA'}
                 </h2>
                 <h2 className="text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-wide drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
                   {manga.title}

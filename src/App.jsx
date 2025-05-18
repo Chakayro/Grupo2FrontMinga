@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       {path:"/", element: <Home/>},
       {path:"/home", element: <Home/>},
-      {path:"/mangas", element: <Mangas/>},
+      {path:"/manga", element: <Mangas/>},
       
       //Aca iran el resto de las rutas que se vayan creando
 
