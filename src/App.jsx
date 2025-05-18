@@ -10,6 +10,13 @@ import Manager from './Pages/Manager'
 import Author from './pages/Author'
 import EditChapterPage from './pages/EditChapterPage'
 
+import NewMangaPage from './pages/NewMangaPage';
+import EditMangaPage from './pages/EditMangaPage';
+import NewChapterPage from './pages/NewChapterPage';
+import NewCompanyPage from './pages/NewCompanyPage';
+import NewAuthorPage from './pages/NewAuthorPage';
+import CompanyProfilePage from './pages/CompanyProfilePage';
+
 function App() {
   
 const router = createBrowserRouter([
@@ -24,6 +31,15 @@ const router = createBrowserRouter([
       {path:"/manager", element: <Manager/>},
       {path:"/author", element: <Author/>},
       {path:"/edit-chapter", element: <EditChapterPage/>},
+      
+      
+      {path:"/new-manga", element: <NewMangaPage/>},
+      {path:"/edit-manga", element: <EditMangaPage/>},
+      { path:"/new-chapter", element: <NewChapterPage/>},
+      { path:"/new-company", element: <NewCompanyPage/>},
+      { path:"/new-author", element: <NewAuthorPage/>},
+      { path:"/company-profile", element: <CompanyProfilePage/>},
+      
 
     ]
   }

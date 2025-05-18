@@ -1,17 +1,12 @@
 // src/pages/Author.jsx
 import React from 'react';
 import BgUp from "../components/BgUp";
-import BgBt from "../components/BGBT";
+import BgBtFull from "../components/BgBtFull"; // O BgBt
 import UserProfileContent from '../components/UserProfileContent';
 
 function Author() {
   return (
-    // Este es el contenido que irá dentro del <Outlet /> de MainLayout.
-    // Este div principal ocupa toda la altura de la sección de "contenido" de MainLayout.
-    // MainLayout ya es h-screen, y la <main> dentro de él es flex-grow.
-    // Si esta página Author debe ocupar toda la altura de la <main>, entonces h-full aquí.
     <div className="w-full h-full bg-gray-100 flex flex-col justify-end items-center"> 
-      {/* La estructura interna de Author.jsx se mantiene como la querías originalmente */}
       <div className="absolute w-full h-full sm:h-9/12 top-0">
         <BgUp />
         <div className="absolute inset-0 flex items-center justify-center md:ml-24">
@@ -20,13 +15,17 @@ function Author() {
           </div>
         </div>
       </div>
-      {/* Este div se asegura que BgBt esté al final y centrado */}
+      
       <div className="w-full flex flex-col justify-end items-center">
-        <BgBt>
-          <div className="h-full w-full flex items-center justify-center">
-            <UserProfileContent />
+        <BgBtFull> {/* O BgBt */}
+          <div className="h-full w-full flex items-center justify-center p-4">
+            {/* El div que envuelve UserProfileContent en Author.jsx ahora solo necesita centrarlo y darle un max-width general si es necesario */}
+            {/* UserProfileContent maneja su propio layout interno de columnas y responsividad */}
+            <div className="w-full max-w-xs sm:max-w-sm md:max-w-3xl"> {/* Ancho responsivo para el bloque UserProfileContent */}
+              <UserProfileContent />
+            </div>
           </div>
-        </BgBt>
+        </BgBtFull>
       </div>
     </div>
   );
