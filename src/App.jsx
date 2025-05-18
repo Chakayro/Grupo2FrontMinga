@@ -5,6 +5,7 @@ import FormLayout from './Layouts/FormLayout'
 import Home from './Pages/Home'
 import Login from './Pages/Users/Login'
 import Register from './Pages/Users/Register'
+import ChangeRol from './Pages/Users/ChangeRole'
 import PrivateRoute from './components/privateRouter'
 import Mangas from './Pages/Mangas/Mangas'
 import axios from 'axios'
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
     children: [
       {path:"/login", element: <PrivateRoute><Login/></PrivateRoute>},
       {path:"/register", element: <Register/>},
+      {path:"/changeRol", element: <ChangeRol/>}
       //Aca iran el resto de las rutas que se vayan creando
     ]
   }

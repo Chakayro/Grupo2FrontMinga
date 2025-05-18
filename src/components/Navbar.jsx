@@ -17,9 +17,9 @@ const Navbar = () => {
   const routes = [
 
     { name: 'Home', path: '/', type: "public" },
-    { name: 'logIn', path: '/login', type:"public" },
-    { name: "LogOut", path:null,  type:"auth"},
-    { name: 'Company/Author', path: '/company', type:"private" },
+    { name: 'Log In', path: '/login', type:"public" },
+    { name: "Log Out", path:null,  type:"auth"},
+    { name: 'Change Rol', path: '/changeRol', type:"private" },
     { name: 'Manga', path: '/manga', type:"public" },
     { name: 'Favorites', path: '/favorites', type:"private" },
   ];
