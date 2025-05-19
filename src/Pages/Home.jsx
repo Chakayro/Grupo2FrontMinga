@@ -45,7 +45,7 @@ const Home = () => {
       </div>
 
       {/* Carrusel visible solo en md+ */}
-      <div>
+      <div className='mt-30'>
         <MangaCarousel slides={mangas} />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const reactions = [
   { id: 1, emoji: "👍", label: "Like" },
@@ -16,7 +16,7 @@ const activeStyle =
 const badgeStyle =
   "absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow";
 
-// counts: { 1: 3, 2: 0, 3: 1, 4: 0 }
+
 const ReactionButtons = ({ onReact, selected, counts = {} }) => {
   const [active, setActive] = useState(selected || null);
 

@@ -5,6 +5,8 @@ import MangaImagen from "../../components/MangaImagen";
 import BackgroundMangas from "../../assets/mangasgeneral.png";
 import CategoryButton from "../../components/CategoryButton";
 import MangaCard from "../../components/PrintCardManga";
+import ChatBubble from "../../components/ChatBubble";
+import goku from "../../assets/goku.png";
 
 const Mangas = () => {
   const dispatch = useDispatch();
@@ -64,6 +66,7 @@ const Mangas = () => {
 
   return (
     <>
+      <ChatBubble />
       <div className="bg-gray-100 h-[85vh]">
         <MangaImagen imagenFondo={BackgroundMangas}>
           <div className="absolute inset-0 flex flex-col items-center justify-start lg:justify-center translate-y-20 lg:-translate-y-25">
@@ -105,14 +108,47 @@ const Mangas = () => {
                 cover_photo={manga.cover_photo}
                 categories={categories}
                 category_id={manga.category_id?.name?.toLowerCase()}
-                detailsPath={`/mangaChapter/${manga._id}`}
+                detailsPath={`/Detailsmanga/${manga._id}`}
               />
             ))}
+
           </div>
+          {<h1 className="text-xl font-bold text-center mt-4">
+            {filteredMangas.length === 0 ? (
+              <div className="text-center px-4 bg-white rounded-lg shadow-md">
+                <div className="w-64 h-64 mx-auto rounded-xl">
+                  <img
+                    src={goku}
+                    alt="Goku fixing a robot"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <p className="my-4 text-lg font-semibold text-gray-700 p-2">
+                  Goku couldn’t find the manga…
+                  <br></br>
+                  Maybe it’s hiding with Shenron!
+                </p>
+              </div>
+
+            ) : null}
+
+          </h1>
+          }
         </div>
       </div>
+
     </>
   );
 };
 
 export default Mangas;
+
+<style>
+  {`
+.fade-to-bg {
+  -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+}
+`}
+</style>
+
