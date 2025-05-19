@@ -5,6 +5,7 @@ import BackgroundMangas from "../../assets/mangasgeneral.png";
 import CategoryButton from "../../components/CategoryButton";
 import MangaCard from "../../components/PrintCardManga";
 import { fetchMangas } from "../../store/actions/mangaAction"; // Ajusta el path si es necesario
+import ChatBubble from "../../components/ChatBubble";
 
 const Mangas = () => {
   const dispatch = useDispatch();
@@ -64,6 +65,7 @@ const Mangas = () => {
 
   return (
     <>
+      <ChatBubble></ChatBubble>
       <div className="bg-gray-100 h-[85vh]">
         <MangaImagen imagenFondo={BackgroundMangas}>
           <div className="absolute inset-0 flex flex-col items-center justify-start lg:justify-center translate-y-20 lg:-translate-y-25">
@@ -107,6 +109,7 @@ const Mangas = () => {
           </div>
         </div>
       </div>
+
     </>
   );
 };
