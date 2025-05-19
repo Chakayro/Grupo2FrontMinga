@@ -1,8 +1,4 @@
-// src/pages/EditChapterPage.jsx
-import React from 'react';
-// Importa tus componentes de layout si los necesitas, ej:
-// import BgUp from "../components/BgUp";
-// import BgBt from "../components/BGBT";
+
 import EditChapterForm from '../components/EditChapterForm'; // Asegúrate de que la ruta sea correcta
 
 // Asume que importarás la imagen del cómic aquí

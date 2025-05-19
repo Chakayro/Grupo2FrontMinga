@@ -8,7 +8,7 @@ function Panel() {
       <div className="w-screen h-screen bg-gray-100 flex flex-col justify-end items-center">
         <div className="absolute w-full h-screen sm:h-8/12 top-0">
           <BgUp />
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center -top-20">
             <div className="text-center md:text-left text-white px-4">
               <h1 className="text-5xl font-bold">Panel</h1>
             </div>

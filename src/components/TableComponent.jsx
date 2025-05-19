@@ -22,9 +22,9 @@ const ToggleSwitch = ({ enabled, onToggle }) => (
 );
 
 // Clases comunes para mantener consistencia y facilitar ajustes de tamaño
-const commonCellClasses = "px-4 sm:px-5 py-1 whitespace-nowrap text-sm"; 
-const iconInCellClasses = "w-4 h-4 sm:w-6 sm:h-6 mr-2 sm:mr-3";
-const logoInCellClasses = "w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"; // Para logos y avatares
+const commonCellClasses = "px-1 md:px-5 py-1 whitespace-nowrap text-xs md:text-sm "; 
+const iconInCellClasses = "w-4 h- md:w-6 md:h-6 mr-1.5 md:mr-3";
+const logoInCellClasses = "w-5 h-5 md:w-7 md:h-7 rounded-full object-cover"; // Para logos y avatares
 
 const TableComponent = () => {
   const [activeTab, setActiveTab] = useState('companies');
@@ -61,7 +61,7 @@ const TableComponent = () => {
   };
 
   return (
-    <div className="w-full w-xl"> {/* Puedes ajustar max-w-xl, max-w-2xl, etc. */}
+    <div className="w-full md:w-xl"> {/* Puedes ajustar max-w-xl, max-w-2xl, etc. */}
       <div className="bg-gray-100 shadow-lg rounded-lg overflow-hidden border border-gray-300">
         <div className="flex border-b border-orange-600">
           {/* Botones de Pestañas Optimizados */}
@@ -96,7 +96,7 @@ const TableComponent = () => {
                     </td>
                     <td className={`${commonCellClasses} text-gray-600`}>{company.website}</td>
                     {/* Celda de Logo específica para Companies */}
-                    <td className={`${commonCellClasses} hidden sm:table-cell`}>
+                    <td className={`${commonCellClasses}  sm:table-cell`}>
                       <img src={company.teamLogo} alt={`${company.name} Logo`} className={logoInCellClasses} />
                     </td>
                     <td className={commonCellClasses}> 
