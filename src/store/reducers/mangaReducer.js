@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { fetchMangas } from "../actions/MangaAction";
+import { fetchMangas } from "../actions/mangaAction";
 
 export const statusTypes = {
   IDLE: "idle",

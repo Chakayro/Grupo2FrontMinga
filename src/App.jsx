@@ -8,6 +8,7 @@ import Register from './Pages/Users/Register'
 import ChangeRol from './Pages/Users/ChangeRole'
 import PrivateRoute from './components/privateRouter'
 import Mangas from './Pages/Mangas/Mangas'
+import MangaChapter from './Pages/Mangas/MangaChapter'
 import DetailsMangas from './Pages/Mangas/DetailsMangas'
 import axios from 'axios'
 import { useEffect } from 'react'
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       {path:"/", element: <Home/>},
       {path:"/home", element: <Home/>},
       {path:"/manga", element: <Mangas/>},
+      {path:"/mangaChapter/:id", element: <MangaChapter/>},
       {path:"/Detailsmanga/:id", element: <DetailsMangas/>},
       
       //Aca iran el resto de las rutas que se vayan creando
@@ -46,7 +48,7 @@ const router = createBrowserRouter([
 
 const loginWithToken = async (token)=> {
   try {
-    const response = await axios.get('http://localhost:8000/api/auth/validateToken',{ 
+    const response = await axios.get('http://localhost:8080/api/auth/validateToken',{ 
         headers: {
           Authorization: `Bearer ${token}`
         }
