@@ -1,9 +1,21 @@
 import logo from '../assets/logo2.png';
 import { Link } from 'react-router-dom';
-
+import {useState } from 'react';
+import {login} from '../store/actions/authAction'
+import { useDispatch } from 'react-redux';
 
 
 const SigIn = () => {
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+const dispatch = useDispatch();
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("se inicia la sesion de usuario");
+    dispatch(login({email, password}));
+}
+
 return (
     <div className=" w-full md:w-1/2 h-screen flex justify-center items-center">
     <div className="bg-white flex flex-col items-center p-8 rounded-2xl space-y-6 w-200">
@@ -16,7 +28,7 @@ return (
         Discover manga, manhua and manhwa, track your progress, have fun, read manga.
         </p>
 
-        <form className="w-full space-y-4 max-w-sm">
+        <form className="w-full space-y-4 max-w-sm" onSubmit={handleSubmit}>
         <div className="relative w-full mt-4">
             <label
                 htmlFor="email"
@@ -26,6 +38,7 @@ return (
             <input
                 type="email"
                 id="email"
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
                 className="w-full px-4 pt-5 pb-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -44,6 +57,7 @@ return (
                 id="password"
                 placeholder="**************"
                 required
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
         </div>
