@@ -1,4 +1,4 @@
-import CreateCompany from '../../components/Company'
+import CreateCompany from '../../components/CompanyForm'
 import RegisImage from '../../assets/registerpage.png'
 
 

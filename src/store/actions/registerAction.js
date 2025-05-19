@@ -4,7 +4,7 @@ import axios from "axios";
 export const register = createAsyncThunk('register/register', async ({email,photo,password},{rejectWithValue})=>{
     try {
         let newUser = {email,password,photo}
-        const response = await axios.post('http://localhost:8000/api/auth/register', newUser)
+        const response = await axios.post('http://localhost:8080/api/auth/register', newUser)
         return response.data;
     } catch (error) {
        if(error.response){
