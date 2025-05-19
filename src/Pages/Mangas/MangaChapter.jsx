@@ -12,6 +12,7 @@ const ChaptersPage = () => {
   const { chapters, status: chaptersStatus, error: chaptersError } = useSelector((state) => state.chapters);
   const { mangas } = useSelector((state) => state.mangas);
   const { id } = useParams();
+console.log("chapters", chapters);
 
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchText, setSearchText] = useState("");
@@ -110,7 +111,7 @@ const ChaptersPage = () => {
                   key={chapter._id}
                   title={chapter.title}
                   description={`Chapter ${chapter.chapterNumber}`}
-                  cover_photo={chapter.cover_photo}
+                  cover_photo={chapter.pages[0]}
                   categories={apiCategories}
                   category_id={mangaCategory?.name?.toLowerCase()} // Usar la categoría del manga
                   detailsPath={`/Detailsmanga/${chapter._id}`}

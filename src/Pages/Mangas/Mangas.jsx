@@ -5,11 +5,8 @@ import MangaImagen from "../../components/MangaImagen";
 import BackgroundMangas from "../../assets/mangasgeneral.png";
 import CategoryButton from "../../components/CategoryButton";
 import MangaCard from "../../components/PrintCardManga";
-<<<<<<< HEAD
-import { fetchMangas } from "../../store/actions/mangaAction"; // Ajusta el path si es necesario
 import ChatBubble from "../../components/ChatBubble";
-=======
->>>>>>> 3a53666a89c9af062a896f812b1a8134d39ab869
+
 
 const Mangas = () => {
   const dispatch = useDispatch();
