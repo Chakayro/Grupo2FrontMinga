@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-// Recibe el objeto manga y el array de categorías para buscar el color
-const MangaCard = ({ manga, categories }) => {
+// Recibe props individuales para máxima reutilización
+const MangaCard = ({
+  title,
+  description,
+  cover_photo,
+  categories,
+  category_id,
+  detailsPath,
+  manga = {}, // opcional, para compatibilidad
+}) => {
+  // Buscar la categoría correspondiente
   const category =
-    categories.find(
+    categories?.find(
       (cat) =>
         (cat.category_id || "").toLowerCase() ===
-        (manga.category_id && manga.category_id.name
-          ? manga.category_id.name.toLowerCase()
-          : "")
-    ) || categories[0];
+        (category_id || manga.category_id?.name?.toLowerCase() || "")
+    ) || categories?.[0];
 
   // Estado para el formato de la imagen
   const [isVertical, setIsVertical] = useState(false);
@@ -27,33 +34,39 @@ const MangaCard = ({ manga, categories }) => {
                     md:h-[23vh] md:w-[40vw] lg:h-[30vh] lg:w-[35vw] xl:h-[35vh] 2xl:h-[34vh] 2xl:w-[33vw]"
     >
       {/* Barra de color vertical */}
-      {category.color && category.color.startsWith("#") ? (
+      {category?.color && category.color.startsWith("#") ? (
         <div className="h-[60%] w-2" style={{ background: category.color }} />
       ) : (
-        <div className={`h-[60%] w-2 ${category.color}`} />
+        <div className={`h-[60%] w-2 ${category?.color || ""}`} />
       )}
       {/* Contenido principal */}
       <div className="flex-1 flex flex-row items-center pl-3 py-2 w-[95%]">
         <div className="flex-1 flex flex-col justify-between h-full text-left">
-          <p className="text-md md:text-lg lg:text-xl font-semibold text-gray-900 line-clamp-2">
-            {manga.title}
-          </p>
-          <p className="text-sm md:text-md lg:text-lg font-semibold  text-gray-900 line-clamp-2">
-            {manga.description}
-          </p>
-          <span
-            className={`text-xs md:text-sm lg:text-md font-medium mt-1`}
-            style={
-              category.color && category.color.startsWith("#")
-                ? { color: category.color }
-                : {}
-            }
-          >
-            {category.category_id}
-          </span>
+          <div>
+            <p className="text-md md:text-lg lg:text-xl font-semibold text-gray-900 line-clamp-2">
+              {title || manga.title}
+            </p>
+            {description !== undefined &&
+              description !== null &&
+              description !== "" && (
+                <p className="text-sm md:text-md lg:text-lg font-semibold text-gray-900 line-clamp-2">
+                  {description}
+                </p>
+              )}
+            <span
+              className={`text-xs md:text-sm lg:text-md font-medium mt-1`}
+              style={
+                category?.color && category.color.startsWith("#")
+                  ? { color: category.color }
+                  : {}
+              }
+            >
+              {category?.category_id}
+            </span>
+          </div>
           <Link
-            to={`/Detailsmanga/${manga._id}`}
-            className="w-[50%] mt-3 flex items-center justify-center bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition"
+            to={detailsPath || `/Detailsmanga/${manga._id}`}
+            className="w-[50%] flex items-center justify-center bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition mt-4"
           >
             Read
           </Link>
@@ -61,8 +74,8 @@ const MangaCard = ({ manga, categories }) => {
         {/* Contenedor de la imagen */}
         <div className="h-full w-[50%] overflow-hidden rounded-l-full flex items-center justify-end">
           <img
-            src={manga.cover_photo}
-            alt={manga.title}
+            src={cover_photo || manga.cover_photo}
+            alt={title || manga.title}
             onLoad={handleImageLoad}
             className={
               isVertical
