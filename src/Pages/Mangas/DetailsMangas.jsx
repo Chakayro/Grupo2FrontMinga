@@ -54,7 +54,7 @@ const DetailsMangas = () => {
         </div>
         {/* Título */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-2">
-          <h2 className="text-3xl md:text-4xl  text-gray-900">{chapter.title}</h2>
+          <h2 className="text-3xl md:text-4xl text-gray-900">{chapter.title}</h2>
         </div>
         {/* Categoría y compañía */}
         <div className="flex items-center justify-between gap-2 mt-1">
@@ -98,7 +98,7 @@ const DetailsMangas = () => {
           </div>
           <div className="flex flex-col items-center">
             <span className="font-bold text-lg text-gray-800 border-l-2 border-r-2 border-gray-200 px-12 md:px-20 py-1">
-              265
+              {chapter.pages.length}
             </span>
             <span className="text-xs text-gray-400">Chapters</span>
           </div>
