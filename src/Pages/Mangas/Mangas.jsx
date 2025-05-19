@@ -14,6 +14,20 @@ const Mangas = () => {
 
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchText, setSearchText] = useState("");
+  const [showNoResults, setShowNoResults] = useState(false);
+
+  useEffect(() => {
+  let timer;
+  if (filteredMangas.length === 0) {
+    timer = setTimeout(() => {
+      setShowNoResults(true);
+    }, 1000); // 1000ms = 1 segundo de delay
+  } else {
+    setShowNoResults(false);
+  }
+  
+  return () => clearTimeout(timer);
+}, [filteredMangas.length]);
 
   // Extraer categorías únicas de los mangas
   const apiCategories = [];
@@ -114,7 +128,7 @@ const Mangas = () => {
 
           </div>
           {<h1 className="text-xl font-bold text-center mt-4">
-            {filteredMangas.length === 0 ? (
+            {filteredMangas.length === 0 && showNoResults ? (
               <div className="text-center px-4 bg-white rounded-lg shadow-md">
                 <div className="w-64 h-64 mx-auto rounded-xl">
                   <img
