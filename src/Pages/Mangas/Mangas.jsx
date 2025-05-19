@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchMangas } from "../../store/actions/mangaAction";
 import MangaImagen from "../../components/MangaImagen";
 import BackgroundMangas from "../../assets/mangasgeneral.png";
 import CategoryButton from "../../components/CategoryButton";
 import MangaCard from "../../components/PrintCardManga";
-import { fetchMangas } from "../../store/actions/mangaAction"; 
 
 const Mangas = () => {
   const dispatch = useDispatch();
@@ -99,9 +99,13 @@ const Mangas = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
             {filteredMangas.map((manga) => (
               <MangaCard
-                key={manga._id}
-                manga={manga}
+                key={manga._id}  // Agregamos la key aquí
+                title={manga.title}
+                description={manga.description}
+                cover_photo={manga.cover_photo}
                 categories={categories}
+                category_id={manga.category_id?.name?.toLowerCase()}
+                detailsPath={`/mangaChapter/${manga._id}`}
               />
             ))}
           </div>
