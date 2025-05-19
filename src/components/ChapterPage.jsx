@@ -1,4 +1,6 @@
 const ChapterPage = ({ title, imageUrl, onRead }) => {
+  const formattedTitle = title?.toLowerCase().includes('chapter') ? title : `Chapter: ${title}`;
+
   return (
     <div className="flex items-center gap-4 mb-2">
       <img
@@ -6,8 +8,8 @@ const ChapterPage = ({ title, imageUrl, onRead }) => {
         alt={`Chapter ${title}`}
         className="w-10 h-10 rounded object-cover"
       />
-      <div className="flex-grow min-w-0"> 
-        <span className="truncate block">{title}</span>
+      <div className="flex-grow min-w-0">
+        <span className="truncate block">{formattedTitle}</span>
       </div>
       <button
         onClick={() => onRead(imageUrl)}
@@ -19,4 +21,4 @@ const ChapterPage = ({ title, imageUrl, onRead }) => {
   );
 };
 
-export default ChapterPage;
+export default ChapterPage; 
