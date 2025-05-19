@@ -1,13 +1,13 @@
-import SigUpForm from '../../components/SigUpForm'
+import CreateAuthor from '../../components/AuthorForm'
 import RegisImage from '../../assets/registerpage.png'
 
 
-const Register = ()=>{
+const Author = ()=>{
 
     return (
         <>
         <div className='flex'>
-        <SigUpForm/>
+        <CreateAuthor/>
         <div className='hidden md:flex w-1/2 h-screen '>
             <img src={RegisImage} alt="Login Image"  className='w-full h-full object-center object-cover'/>
         </div>
@@ -16,4 +16,4 @@ const Register = ()=>{
     )
 }
 
-export default Register
+export default Author

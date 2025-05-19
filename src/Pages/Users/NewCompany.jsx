@@ -1,13 +1,13 @@
-import SigUpForm from '../../components/SigUpForm'
+import CreateCompany from '../../components/CompanyForm'
 import RegisImage from '../../assets/registerpage.png'
 
 
-const Register = ()=>{
+const Company = ()=>{
 
     return (
         <>
         <div className='flex'>
-        <SigUpForm/>
+        <CreateCompany/>
         <div className='hidden md:flex w-1/2 h-screen '>
             <img src={RegisImage} alt="Login Image"  className='w-full h-full object-center object-cover'/>
         </div>
@@ -16,4 +16,4 @@ const Register = ()=>{
     )
 }
 
-export default Register
+export default Company
