@@ -47,7 +47,7 @@ const DetailsMangas = () => {
         {/* Imagen */}
         <div className="w-full flex justify-center">
           <img
-            src={chapter.cover_photo}
+            src={manga.cover_photo}
             alt={chapter.title}
             className="rounded-xl object-cover object-top w-[100%] h-[60vh] shadow"
           />
@@ -131,7 +131,7 @@ const DetailsMangas = () => {
                         <ChapterPage
                           key={index}
                           page={index}
-                          imageUrl={chapter.cover_photo}
+                          imageUrl={chapter.pages[index]}
                           onRead={handleRead}
                         />
                       ))}
