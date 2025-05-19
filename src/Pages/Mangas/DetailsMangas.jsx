@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import CategoryButton from "../../components/CategoryButton";
 import ReactionButtons from "../../components/ReactionButtons ";
+import TabsManga from "../../components/TabsManga";
 
 const DetailsMangas = () => {
   const { id } = useParams();
@@ -89,21 +90,35 @@ const DetailsMangas = () => {
             <span className="text-xs text-gray-400">Language</span>
           </div>
         </div>
-        {/* Botones */}
-        <div className="flex gap-2 mt-4">
-          <button className="flex-1 bg-orange-400 text-white font-bold py-2 rounded-full shadow hover:bg-orange-500 transition">
-            Manga
-          </button>
-          <button className="flex-1 bg-gray-200 text-gray-700 font-bold py-2 rounded-full shadow hover:bg-gray-300 transition">
-            Chapters
-          </button>
-        </div>
-        {/* Descripción */}
-        <div className="mt-4">
-          <p className="text-gray-700 text-sm md:text-base">
-            {manga.description}
-          </p>
-        </div>
+        {/* Pestaña */}
+        <TabsManga
+          tabs={[
+            {
+              label: "Manga",
+              content: (
+                <div className="mt-4 p-2">
+                  <p className="text-gray-700 text-base text-justify">
+                    {manga.description}
+                  </p>
+                </div>
+              ),
+            },
+            {
+              label: "Chapters",
+              content: (
+                <div className="mt-4 p-2">
+                  {/* Aquí tu lista de capítulos */}
+                  <ul className="list-disc pl-5 text-gray-700">
+                    <li>Capítulo 1: Nombre del capítulo</li>
+                    <li>Capítulo 2: Nombre del capítulo</li>
+                    <li>Capítulo 3: Nombre del capítulo</li>
+                  </ul>
+                </div>
+              ),
+            },
+          ]}
+        />
+        
       </div>
     </div>
   );
