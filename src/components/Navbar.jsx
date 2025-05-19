@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import logo2 from '../assets/logo2.png'; // Ajusta la ruta si hace falta
+import userPhoto from '../assets/user.png';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store/actions/authAction';
@@ -18,30 +19,31 @@ const Navbar = () => {
   };
 
   const routes = [
-    { name: 'Home',               path: '/',               type: "public"  },
-    { name: 'Log In',             path: '/login',          type: "public"  },
-    { name: 'Log Out',            path: null,              type: "auth"    },
-    { name: 'Change Rol',         path: '/changeRol',      type: "private" },
-    { name: 'Author or Company',  path: '/AuthorCompany',  type: "private" },
-    { name: 'Manga',              path: '/manga',          type: "public"  },
-    { name: 'Favorites',          path: '/favorites',      type: "private" },
+    { name: 'Home', path: '/', type: "public" },
+    { name: 'Log In', path: '/login', type: "public" },
+    { name: 'Log Out', path: null, type: "auth" },
+    { name: 'Change Rol', path: '/changeRol', type: "private" },
+    { name: 'Author or Company', path: '/AuthorCompany', type: "private" },
+    { name: 'Mangas', path: '/manga', type: "public" },
+    { name: 'Favorites', path: '/favorites', type: "private" },
   ];
- console.log('rol del user', rol);
- 
+  console.log('rol del user', rol);
+  console.log("user", user);
+  
+
   return (
     <nav className="fixed top-0 w-full h-15 z-50">
       <div className="flex items-center justify-between px-4 py-3 h-full">
         {!isOpen
           ? <button className="text-orange-500 text-2xl z-50" onClick={() => setIsOpen(true)}>
-              <FaBars />
-            </button>
+            <FaBars />
+          </button>
           : <button className="text-2xl text-amber-50 z-50" onClick={() => setIsOpen(false)}>
-              <FaTimes />
-            </button>
+            <FaTimes />
+          </button>
         }
         <img src={logo2} alt="logo" className="h-10 z-50" />
       </div>
-
       <div
         className={`fixed top-0 left-0 w-full md:w-1/4 h-screen
                     bg-gradient-to-b from-orange-500 to-orange-600 text-white
@@ -49,7 +51,20 @@ const Navbar = () => {
                     ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="flex flex-col mt-10 p-8">
+          {<div className='flex items-center mb-4 justify-start align-center bg-orange-900 rounded-lg'>
+            <img src={rol === undefined ? userPhoto : user?.photo} className='w-10 h-10 m-2 rounded-lg border-1 border-black' />
+            <h1 className="font-bold text-center mx-2">
+              {rol === 0 ? `Welcome, ${user?.email?.split("@")[0]}!` : 'Welcome, You Can Log In!'}
+            </h1>
+          </div>
+          }
+
+
           {routes.map(route => {
+            if (token) {
+              <h1>hola</h1>
+
+            }
             // 1) Rutas públicas
             if (route.type === "public") {
               // Si no hay token → todas las públicas
