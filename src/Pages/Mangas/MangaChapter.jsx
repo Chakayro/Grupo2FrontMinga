@@ -10,6 +10,7 @@ import MangaCard from "../../components/PrintCardManga";
 const ChaptersPage = () => {
   const dispatch = useDispatch();
   const { chapters, status: chaptersStatus, error: chaptersError } = useSelector((state) => state.chapters);
+  
   const { mangas } = useSelector((state) => state.mangas);
   const { id } = useParams();
 console.log("chapters", chapters);
