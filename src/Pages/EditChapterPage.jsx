@@ -7,7 +7,7 @@ import MyComicCover from '../assets/naruto.png'; // CAMBIA ESTA RUTA
 function EditChapterPage() {
   return (
 
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4"> {/* Fondo y centrado */}
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center "> {/* Fondo y centrado */}
       <EditChapterForm comicCoverImageUrl={MyComicCover} />
     </div>
 

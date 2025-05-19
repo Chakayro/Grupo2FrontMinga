@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 
 // Definiciones de estilo (idealmente importadas)
-const formInputClasses = "w-full p-1.5 pl-1 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-sm placeholder-gray-400";
-const primaryButtonClasses = "w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-full transition-colors shadow-md text-sm";
-const pageTitleClasses = "text-2xl font-bold text-gray-800 text-center mb-8";
-const formContainerMobileClasses = "w-full max-w-xs space-y-6";
+const formInputClasses = "w-9/12 p-4 pl-1 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors font-semibold text-sm placeholder-gray-500";
+const primaryButtonClasses = "w-9/12 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-full transition-colors shadow-md text-sm mt-16";
+const pageTitleClasses = "text-4xl font-semibold text-gray-600 text-center mb-18";
+const formContainerMobileClasses = "w-full max-w-xs space-y-3";
 
 function NewChapterPage() {
   const [formData, setFormData] = useState({

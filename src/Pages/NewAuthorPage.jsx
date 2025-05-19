@@ -2,11 +2,11 @@
 import React, { useState } from 'react';
 
 // Temporary style definitions
-const formInputClasses = "w-full p-1.5 pl-1 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-sm placeholder-gray-400";
-const primaryButtonClasses = "w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-full transition-colors shadow-md text-sm";
-const pageTitleClasses = "text-2xl font-bold text-gray-800 text-center mb-6"; // mb-6 to match image
+const formInputClasses = "w-10/12 p-1.5 pl-1 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-sm placeholder-gray-400";
+const primaryButtonClasses = "w-10/12 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 px-4 mt-4 rounded-full transition-colors shadow-md text-lg";
+const pageTitleClasses = "text-3xl font-semibold text-gray-800 text-center mb-11"; // mb-6 to match image
 const formContainerMobileClasses = "w-full max-w-xs space-y-5"; // space-y-5 to match EditAuthor
-const avatarImageClasses = "w-24 h-24 rounded-full object-cover shadow-md mb-6 border-2 border-gray-300 bg-gray-200"; // Placeholder style
+const avatarImageClasses = "w-24 h-24 rounded-full object-cover shadow-md mb-9 border-2 border-gray-300 bg-gray-200"; // Placeholder style
 
 // Simple SVG Placeholder for Avatar
 const AvatarPlaceholderIcon = () => (

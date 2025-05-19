@@ -3,27 +3,17 @@ import React from 'react';
 import UserCakeIcon from '../assets/cake.png'; 
 import UserLocationIcon from '../assets/location.png';
 
-// --- Clases de Estilo ---
-// Estilos base son para MÓVIL, y los prefijos md: son para PC (desktop).
 
-// Form Inputs: text-sm is fine for both.
-const formInputClasses = "w-full p-0 pl-1 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-sm";
+const formInputClasses = "w-full p-0 pl- border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-sm";
 
 // Form Buttons: py-3 px-4 text-sm is fine for both.
 const formButtonBaseClasses = "w-full font-semibold py-3 px-4 rounded-full transition-colors shadow-sm text-sm";
 const saveButtonClasses = `${formButtonBaseClasses} bg-teal-400 hover:bg-teal-500 text-white`;
 const deleteButtonClasses = `${formButtonBaseClasses} bg-pink-100 hover:bg-pink-200 text-red-500`;
 
-// Profile Image:
-// Mobile: w-20 h-20 (as per EditAuthor.png)
-// PC: Your sm:w-27 sm:h-27 was non-standard. I'll use md:w-24 md:h-24 as a common PC size.
-// If your PC size was different and defined by w-20 h-25 (non-standard), we need to clarify.
-// For now: mobile default, md: for PC.
-const profileImageClasses = "w-20 h-20 md:w-27 md:h-27 rounded-full object-cover shadow-md border-2 border-white"; 
-// Margin bottom for image: mb-0 for mobile (no text below), md:mb-2 for PC (to space from text details)
 
-// Profile Name & Details: Hidden on mobile, visible on PC.
-// PC styles for these are taken from your last UserProfileContent.jsx (sm:text-lg, sm:text-sm, etc. will become md:text-lg, md:text-sm)
+const profileImageClasses = "w-20 h-20 md:w-27 md:h-27 rounded-full object-cover shadow-md border-2 border-white"; 
+
 const profileNameClasses = "text-gray-800 text-center font-semibold hidden md:block md:text-lg md:mt-2"; // PC: text-lg, mt-2
 const profileDetailContainerClasses = "items-center text-gray-600 mt-0.5 hidden md:flex md:text-sm md:mt-1"; // PC: text-sm, mt-1
 const profileDetailIconClasses = "w-3 h-3 md:w- md:h-3.5 mr-1 md:mr-1.5"; // PC: w-3.5 h-3.5, mr-1.5
@@ -43,7 +33,7 @@ function UserProfileContent() {
   return (
     // This component returns two main divs.
     // Their layout (flex-col vs md:flex-row, order, gap, max-w) is controlled by the div in Author.jsx
-    <div className="w-full flex flex-col md:flex-row md:justify-around items-center md:items-start gap-y-8 md:gap-x-12 lg:gap-x-50">
+    <div className="w-full flex flex-col md:flex-row md:justify-around items-center md:items-start gap-y-8 md:gap-x-12 lg:gap-x-60">
       
       {/* Sección de Datos del Perfil con Foto */}
       {/* Móvil: order-1 (arriba). PC: md:order-2 (derecha). */}

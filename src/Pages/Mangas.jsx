@@ -1,6 +1,6 @@
 // src/pages/Mangas.jsx
 import BgUp from "../components/BgUp";
-import BgBt from "../components/BgBt"; // Assuming BgBt.jsx is the correct filename
+import BgBt from "../components/BgBt";
 
 // Un simple ícono de búsqueda en SVG
 const SearchIcon = () => (
@@ -55,7 +55,7 @@ function Mangas() {
           </div>
         </div>
         <BgBt>
-          {/* Puedes añadir contenido dentro de BgBt aquí si es necesario */}
+        
         </BgBt>
       </div>
     </>

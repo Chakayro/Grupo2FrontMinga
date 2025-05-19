@@ -3,12 +3,12 @@ import React, { useState } from 'react'; // useEffect eliminado ya que no se usa
 // import { useParams } from 'react-router-dom'; // Se mantiene comentado por si lo necesitas después
 
 // Definiciones de estilo (idealmente importadas de un archivo común)
-const formInputClasses = "w-full p-1.5 pl-1 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-sm placeholder-gray-400";
-const tealButtonClasses = "w-full bg-teal-400 hover:bg-teal-500 text-white font-semibold py-3 px-4 rounded-full transition-colors shadow-md text-sm";
-const pinkButtonClasses = "w-full bg-pink-100 hover:bg-pink-200 text-red-500 font-semibold py-3 px-4 rounded-full transition-colors shadow-md text-sm";
+const formInputClasses = "w-10/12 p-3 pl-1 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-md placeholder-gray-400";
+const tealButtonClasses = "w-10/12 bg-teal-400 hover:bg-teal-500 text-white font-extrabold py-4 px-4 rounded-full transition-colors shadow-md text-xl mt-6 mb-5";
+const pinkButtonClasses = "w-10/12 bg-pink-100 hover:bg-pink-200 text-red-300 font-extrabold py-4 px-4 rounded-full transition-colors shadow-md text-xl";
 // pageTitleClasses eliminada ya que no se usa
 const formContainerMobileClasses = "w-full max-w-xs space-y-5";
-const avatarImageClasses = "w-24 h-24 rounded-full object-contain shadow-md mb-6 border-2 border-gray-300 bg-white p-2";
+const avatarImageClasses = "w-24 h-24 rounded-full object-contain shadow-md mb-11 border-2 border-gray-300 bg-white p-2";
 
 // Icono de placeholder si no hay logo
 const CompanyLogoPlaceholder = () => (
