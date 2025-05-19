@@ -54,7 +54,7 @@ const Navbar = () => {
           {<div className='flex items-center mb-4 justify-start align-center bg-orange-900 rounded-lg'>
             <img src={rol === undefined ? userPhoto : user?.photo} className='w-10 h-10 m-2 rounded-lg border-1 border-black' />
             <h1 className="font-bold text-center mx-2">
-              {rol === 0 ? `Welcome, ${user?.email?.split("@")[0]}!` : 'Welcome, You Can Log In!'}
+              {rol >= 0 ? `Welcome, ${user?.email?.split("@")[0]}!` : 'Welcome, You Can Log In!'}
             </h1>
           </div>
           }
