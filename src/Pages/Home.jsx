@@ -2,14 +2,10 @@ import BgUp from "../components/BgUp";
 
 function Home() {
   return (
-    // Contenedor principal: quieres que este sea h-full (altura completa)
-    // para que las fracciones h-8/12 y h-4/12 funcionen correctamente dentro de él.
-    // Además, necesita ser 'relative' si los hijos son 'absolute' y quieres que
-    // se posicionen respecto a este contenedor.
-    <div className="w-full h-screen bg-gray-100 flex flex-col"> {/* Cambiado a h-screen y flex flex-col */}
 
-      {/* Sección Superior (80% de la altura) */}
-      <div className="relative w-full h-8/12"> {/* h-8/12 y relative para el texto absoluto */}
+    <div className="w-full h-screen bg-gray-100 flex flex-col">
+      
+      <div className="relative w-full h-8/12"> 
         <BgUp/> {/* BgUp llenará este div h-8/12 */}
         <div className="absolute inset-0 flex items-center justify-center md:justify-start md:ml-24">
           <div className="text-center md:text-left text-white px-4 ">

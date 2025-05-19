@@ -3,7 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import useMediaQuery from "../hooks/useMediaQuery"; // Asegúrate que la ruta a este hook sea correcta
 
 // --- Iconos (con mayor grosor) ---
 const ArrowDownIcon = () => (
@@ -25,7 +24,7 @@ const NAV_BTN_REAPPEAR_DELAY_MS = 50;
 const BTN_DELAY_TO_BOTTOM_ON_FOOTER_TO_CONTENT = 500;
 const BTN_DELAY_TO_TOP_ON_CONTENT_TO_FOOTER = PAGE_TRANSITION_MS - 100; 
 
-const MainLayout = () => {
+const LayoutAnim = () => {
 
 
   const [activeSection, setActiveSection] = useState('content'); 
@@ -121,4 +120,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+export default LayoutAnim;
