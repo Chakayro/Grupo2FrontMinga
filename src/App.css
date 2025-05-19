@@ -46,11 +46,4 @@
     }
   }
   
-  html, body, #root {
-  height: 100%;
-  margin: 0;
-  /* overflow: hidden;  <-- QUITA ESTO SI LO TENÍAS PARA TODO, O AJÚSTALO */
-}
-/* Para móvil, queremos scroll, así que html y body no deben tener overflow: hidden globalmente
-   a menos que lo controles muy específicamente. El overflow:hidden en el div raíz del MainLayout
-   para desktop es el importante para ese modo. */
+  

@@ -1,9 +1,9 @@
 // src/data/data.js
-import HomeImage from "../assets/bgHome.png";
-import PanelImage from "../assets/bgPanel.png";
-import MangasImage from "../assets/bgMangas.png";
-import ManagerImage from "../assets/bgManager.png";
-import AuthorImage from "../assets/bgAuthor.png";
+import HomeImage from "../assets/backgroundPrincipal.png";
+import PanelImage from "../assets/backgroundpanel.png";
+import MangasImage from "../assets/mangasgeneral.png";
+import ManagerImage from "../assets/mymangas.png";
+import AuthorImage from "../assets/backgroundProfile.png";
 
 
 const data = {
@@ -29,7 +29,7 @@ const data = {
       description: "Fondo para la página de manager"
     },
     {
-      id: "author", // Este ID se usará para coincidir con la ruta, ej: /author
+      id: "Autores", // Este ID se usará para coincidir con la ruta, ej: /author
       photo: AuthorImage,
       description: "Fondo para la página de autor"
     },
