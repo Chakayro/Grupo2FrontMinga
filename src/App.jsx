@@ -2,6 +2,10 @@ import './App.css'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import MainLayout from './Layouts/MainLayout'
 import FormLayout from './Layouts/FormLayout'
+import LayoutAnim from './Layouts/LayoutAnim'
+
+
+
 import Home from './Pages/Home'
 import Login from './Pages/Users/Login'
 import Register from './Pages/Users/Register'
@@ -16,6 +20,16 @@ import { useDispatch } from 'react-redux'
 import { setUser } from './store/actions/authAction'
 import Author from './Pages/Users/NewAuthor'
 import Company from './Pages/Users/NewCompany'
+
+
+
+// rutas de Chakayro
+import EditChapter from './pages/Mangas/CRUD/EditChapter'
+import EditManga from './pages/Mangas/CRUD/EditManga'
+import CompanyProfile from './Pages/Profile/Company/CompanyProfile'
+import AuthorProfile from './Pages/Profile/Author/AuthorProfile'
+import CreateChapter from './pages/Mangas/CRUD/CreateChapter'
+import CreateManga from './pages/Mangas/CRUD/CreateManga'
 
 
 const router = createBrowserRouter([
@@ -43,7 +57,20 @@ const router = createBrowserRouter([
       {path:"/newCompany", element: <Company/>},
       //Aca iran el resto de las rutas que se vayan creando
     ]
+  },
+   {path: "/",
+     element: <LayoutAnim/>,
+    children: [
+      {path:"/editChapter", element: <EditChapter/>},
+      {path:"/editManga", element: <EditManga/>},
+      {path:"/companyProfile", element: <CompanyProfile/>},
+      {path:"/AuthorProfile", element: <AuthorProfile/>},
+      {path:"/createChapter", element: <CreateChapter/>},
+      {path:"/createManga", element: <CreateManga/>},
+
+    ]
   }
+  
 ])
 
 const loginWithToken = async (token)=> {
