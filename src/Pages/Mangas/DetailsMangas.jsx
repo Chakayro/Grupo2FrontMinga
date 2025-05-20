@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 
 const DetailsMangas = () => {
   const { state } = useLocation();
-  const {manga} = state || {};
+  const { manga } = state || {};
   const id = manga?._id || null;
 
   const dispatch = useDispatch();
@@ -25,9 +25,6 @@ const DetailsMangas = () => {
     window.scrollTo(0, 0);
     dispatch(fetchChaptersByMangaId(id)); // Llama a la acción con el ID del manga
   }, [dispatch, id]);
-  const handleRead = (imageUrl) => { 
-    window.open(imageUrl, "_blank");
-  };
 
   if (!manga) {
     return (
@@ -38,7 +35,7 @@ const DetailsMangas = () => {
   }
 
   // Filtrar los capítulos para mostrar solo los del manga actual
-  const mangaChapters = chapters.filter(chapter => chapter.manga_id === id);
+  const mangaChapters = chapters.filter((chapter) => chapter.manga_id === id);
 
   return (
     <div className="min-h-screen bg-gray-200 flex items-center justify-center py-16 ">
@@ -128,9 +125,10 @@ const DetailsMangas = () => {
                       {mangaChapters.map((chapter) => (
                         <ChapterPage
                           key={chapter._id}
+                          _id={chapter._id} 
                           title={chapter.title}
                           imageUrl={chapter.pages[0]}
-                          onRead={() => handleRead(chapter.pages[0])}
+                          chapter={chapter}
                         />
                       ))}
                     </div>
