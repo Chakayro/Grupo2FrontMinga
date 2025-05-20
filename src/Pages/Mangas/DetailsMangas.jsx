@@ -1,35 +1,31 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchChaptersByMangaId } from "../../store/actions/chapterMangaAction";
 import CategoryButton from "../../components/CategoryButton";
 import ReactionButtons from "../../components/ReactionButtons ";
 import TabsManga from "../../components/TabsManga";
 import ChapterPage from "../../components/ChapterPage";
+import { useLocation } from "react-router-dom";
 
 const DetailsMangas = () => {
-  const { id } = useParams();
+  const { state } = useLocation();
+  const {manga} = state || {};
+  const id = manga?._id || null;
+
   const dispatch = useDispatch();
   const {
     chapters,
     status: chaptersStatus,
     error: chaptersError,
   } = useSelector((state) => state.chapters);
-  const { mangas } = useSelector((state) => state.mangas);
 
   // Encontrar el manga correspondiente usando el id del useParams
-  const manga = mangas.find((m) => m._id === id);
-
-  console.log("Manga seleccionado:", manga);
-  console.log("Capítulos del manga en el estado:", chapters);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchChaptersByMangaId(id)); // Llama a la acción con el ID del manga
   }, [dispatch, id]);
-
-  const handleRead = (imageUrl) => {
-    console.log("Opening image:", imageUrl);
+  const handleRead = (imageUrl) => { 
     window.open(imageUrl, "_blank");
   };
 
