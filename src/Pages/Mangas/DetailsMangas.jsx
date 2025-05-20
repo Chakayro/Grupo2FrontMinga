@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchChaptersByMangaId } from "../../store/actions/chapterMangaAction"; // Importa la acción
+import { fetchChaptersByMangaId } from "../../store/actions/chapterMangaAction";
 import CategoryButton from "../../components/CategoryButton";
 import ReactionButtons from "../../components/ReactionButtons ";
 import TabsManga from "../../components/TabsManga";
@@ -9,7 +9,7 @@ import ChapterPage from "../../components/ChapterPage";
 
 const DetailsMangas = () => {
   const { id } = useParams();
-  const dispatch = useDispatch(); // Obtén la función dispatch
+  const dispatch = useDispatch();
   const {
     chapters,
     status: chaptersStatus,
@@ -17,32 +17,20 @@ const DetailsMangas = () => {
   } = useSelector((state) => state.chapters);
   const { mangas } = useSelector((state) => state.mangas);
 
-  // Encontrar el capítulo y el manga correspondientes
-  const chapter = chapters.find((ch) => ch._id === id);
-  const manga = mangas.find((m) =>
-    chapter ? m._id === chapter.manga_id : null
-  ); // Encuentra el manga basado en el manga_id del capítulo
+  // Encontrar el manga correspondiente usando el id del useParams
+  const manga = mangas.find((m) => m._id === id);
 
-  console.log("Capitulo seleccionado:", chapter);
   console.log("Manga seleccionado:", manga);
-  console.log('manga desde details', manga);
-  
-  
+  console.log("Capítulos del manga en el estado:", chapters);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Realiza el dispatch para obtener los capítulos del manga al cargar la página
-    dispatch(fetchChaptersByMangaId(id));
+    dispatch(fetchChaptersByMangaId(id)); // Llama a la acción con el ID del manga
   }, [dispatch, id]);
 
-  console.log("Capítulos del manga:", chapters);
-  console.log("Manga seleccionado:", manga);
-
   const handleRead = (imageUrl) => {
-    // Aquí puedes implementar la lógica para abrir la imagen en un visor de pantalla completa
     console.log("Opening image:", imageUrl);
-    // Por ejemplo, puedes usar una ventana modal o una nueva pestaña
-    window.open(imageUrl, "_blank"); //abre la imagen en una nueva pestaña
+    window.open(imageUrl, "_blank");
   };
 
   if (!manga) {
@@ -52,6 +40,9 @@ const DetailsMangas = () => {
       </div>
     );
   }
+
+  // Filtrar los capítulos para mostrar solo los del manga actual
+  const mangaChapters = chapters.filter(chapter => chapter.manga_id === id);
 
   return (
     <div className="min-h-screen bg-gray-200 flex items-center justify-center py-16 ">
@@ -70,7 +61,7 @@ const DetailsMangas = () => {
         </div>
         {/* Categoría y compañía */}
         <div className="flex items-center justify-between gap-2 mt-1">
-          {manga?.category_id && ( // Verifica si manga y category_id existen
+          {manga?.category_id && (
             <CategoryButton
               category_id={manga.category_id.name?.toLowerCase() || ""}
               label={manga.category_id.name}
@@ -80,7 +71,7 @@ const DetailsMangas = () => {
               onClick={() => {}}
             />
           )}
-          {manga?.company_id?.name ? ( // Usar manga para obtener el nombre de la compañía o autor
+          {manga?.company_id?.name ? (
             <span className="text-md md:text-lg font-semibold px-3 py-1 rounded-full bg-blue-100 text-blue-700">
               Compañía: {manga.company_id.name}
             </span>
@@ -95,9 +86,7 @@ const DetailsMangas = () => {
           )}
         </div>
         {/* Reacciones */}
-        <ReactionButtons
-          manga ={manga}
-        />
+        <ReactionButtons manga={manga} />
         {/* Stats */}
         <div className="flex items-center justify-evenly bg-white rounded-xl px-6 py-3 mt-2">
           <div className="flex flex-col items-center">
@@ -106,8 +95,7 @@ const DetailsMangas = () => {
           </div>
           <div className="flex flex-col items-center">
             <span className="font-bold text-lg text-gray-800 border-l-2 border-r-2 border-gray-200 px-12 md:px-20 py-1">
-              {chapters?.length}{" "}
-              {/* Usa chapters?.length para evitar errores si chapters es undefined */}
+              {mangaChapters?.length}
             </span>
             <span className="text-xs text-gray-400">Chapters</span>
           </div>
@@ -139,12 +127,12 @@ const DetailsMangas = () => {
                   {chaptersStatus === "failed" && (
                     <div>Error al cargar capítulos: {chaptersError}</div>
                   )}
-                  {chapters && chapters.length > 0 ? (
+                  {mangaChapters && mangaChapters.length > 0 ? (
                     <div className="space-y-2">
-                      {chapters.map((chapter) => (
+                      {mangaChapters.map((chapter) => (
                         <ChapterPage
                           key={chapter._id}
-                          title={chapter.title} // Pasamos el título del capítulo como prop
+                          title={chapter.title}
                           imageUrl={chapter.pages[0]}
                           onRead={() => handleRead(chapter.pages[0])}
                         />
