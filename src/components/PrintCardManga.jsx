@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // Recibe props individuales para máxima reutilización
@@ -8,7 +8,6 @@ const MangaCard = ({
   cover_photo,
   categories,
   category_id,
-  detailsPath,
   manga = {}, // opcional, para compatibilidad
 }) => {
   // Buscar la categoría correspondiente
@@ -65,7 +64,8 @@ const MangaCard = ({
             </span>
           </div>
           <Link
-            to={detailsPath || `/Detailsmanga/${manga._id}`}
+            to={'/Detailsmanga'}
+            state={{manga}}
             className="w-[50%] flex items-center justify-center bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition mt-4"
           >
             Read
