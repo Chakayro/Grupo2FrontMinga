@@ -25,8 +25,7 @@ const MangaCard = ({
   const handleImageLoad = (e) => {
     const { naturalWidth, naturalHeight } = e.target;
     setIsVertical(naturalHeight > naturalWidth);
-  };
-
+  }; 
   return (
     <div
       className="h-[25vh] w-[70vw] bg-white rounded-lg flex items-center shadow-md overflow-hidden 
@@ -63,13 +62,14 @@ const MangaCard = ({
               {category?.category_id}
             </span>
           </div>
-          <Link
-            to={'/Detailsmanga'}
-            state={{manga}}
+        <Link
+            to={`/Detailsmanga/${manga._id}`}
+            state={{ mangaLocal: manga }}
             className="w-[50%] flex items-center justify-center bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition mt-4"
           >
             Read
           </Link>
+
         </div>
         {/* Contenedor de la imagen */}
         <div className="h-full w-[50%] overflow-hidden rounded-l-full flex items-center justify-end">

@@ -5,13 +5,20 @@ import CategoryButton from "../../components/CategoryButton";
 import ReactionButtons from "../../components/ReactionButtons ";
 import TabsManga from "../../components/TabsManga";
 import ChapterPage from "../../components/ChapterPage";
-import { useLocation } from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {fetchMangaById } from "../../store/actions/mangaAction";
 
 const DetailsMangas = () => {
-  const { state } = useLocation();
-  const { manga } = state || {};
-  const id = manga?._id || null;
+  const {id}= useParams();
+  // Busca el manga en el store siempre por id:
+  const {selectedManga: manga} = useSelector((state) => state.mangas);
 
+  console.log('manga', manga);
+  
+  console.log('manga', manga);
+  
+  //const id = manga?._id || null;
+  
   const dispatch = useDispatch();
   const {
     chapters,
@@ -25,6 +32,13 @@ const DetailsMangas = () => {
     window.scrollTo(0, 0);
     dispatch(fetchChaptersByMangaId(id)); // Llama a la acción con el ID del manga
   }, [dispatch, id]);
+  const handleRead = (imageUrl) => { 
+    window.open(imageUrl, "_blank");
+  };
+  useEffect(() => {
+    dispatch(fetchMangaById(id));
+  }, [dispatch, id]);
+
 
   if (!manga) {
     return (

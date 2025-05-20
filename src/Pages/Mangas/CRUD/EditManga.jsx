@@ -1,0 +1,108 @@
+import React, { useState } from "react";
+
+const formInputClasses =
+  "w-full p-1.5 pl-1 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-sm placeholder-gray-400";
+const formSelectClasses =
+  "w-full p-1.5 pl-1 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-sm appearance-none pr-8 text-gray-500";
+const tealButtonClasses =
+  "w-full bg-teal-400 hover:bg-teal-500 text-white font-semibold py-4 px-4 rounded-full transition-colors shadow-md text-xl";
+const pinkButtonClasses =
+  "w-full bg-pink-100 hover:bg-pink-200 text-orange-400 font-semibold py-4 px-4 rounded-full transition-colors shadow-md text-xl";
+const titleClasses = "text-3xl font-semibold text-gray-600 text-center mb-14";
+const formContainerClasses = "w-full max-w-xs space-y-6";
+
+const ChevronDownIcon = () => (
+  <svg
+    className="w-4 h-4 text-gray-400 pointer-events-none"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+  </svg>
+);
+
+export default function EditManga() {
+  const [formData, setFormData] = useState({
+    title: "Shingeki No Kyojin",
+    description: "After his hometown is destroyed...",
+    photo: "https://example.com/snk.jpg",
+    category: "shonen"
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleEdit = () => {
+    console.log("Edit Manga Data:", formData);
+  };
+
+  const handleCancel = () => {
+    console.log("Edit Cancelled");
+  };
+
+  return (
+    <div className="h-screen flex flex-col items-center justify-center p-4 bg-gray-100">
+      <div className={formContainerClasses}>
+        <h1 className={titleClasses}>Edit Manga</h1>
+
+        <input
+          type="text"
+          name="title"
+          placeholder="title of the manga"
+          value={formData.title}
+          onChange={handleChange}
+          className={formInputClasses}
+        />
+
+        <input
+          type="text"
+          name="description"
+          placeholder="description"
+          value={formData.description}
+          onChange={handleChange}
+          className={formInputClasses}
+        />
+
+        <input
+          type="url"
+          name="photo"
+          placeholder="photo"
+          value={formData.photo}
+          onChange={handleChange}
+          className={formInputClasses}
+        />
+
+        <div className="relative">
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className={formSelectClasses}
+          >
+            <option value="" disabled>
+              category
+            </option>
+            <option value="shonen">Shonen</option>
+            <option value="shojo">Shojo</option>
+          </select>
+          <div className="absolute inset-y-0 right-0 flex items-center px-2">
+            <ChevronDownIcon />
+          </div>
+        </div>
+
+        <div className="pt-2 space-y-3">
+          <button type="button" onClick={handleEdit} className={tealButtonClasses}>
+            Edit
+          </button>
+          <button type="button" onClick={handleCancel} className={pinkButtonClasses}>
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -26,10 +26,7 @@ const Navbar = () => {
     { name: 'Author or Company', path: '/AuthorCompany', type: "private" },
     { name: 'Mangas', path: '/manga', type: "public" },
     { name: 'Favorites', path: '/favorites', type: "private" },
-  ];
-  console.log('rol del user', rol);
-  console.log("user", user);
-  
+  ]; 
 
   return (
     <nav className="fixed top-0 w-full h-15 z-50">
