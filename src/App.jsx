@@ -45,16 +45,16 @@ const router = createBrowserRouter([
     children: [
       {path:"/login", element: <PrivateRoute><Login/></PrivateRoute>},
       {path:"/register", element: <Register/>},
-      {path:"/changeRol", element: <ChangeRol/>},
-      {path:"/newAuthor", element: <Author/>},
-      {path:"/newCompany", element: <Company/>},
-      {path:"/editChapter", element: <EditChapter/>},
-      {path:"/companyProfile", element: <CompanyProfile/>},
-      {path:"/editManga", element: <EditManga/>},
-      {path:"/authorProfile", element: <AuthorProfile/>},
-      {path:"/createChapter", element: <CreateChapter/>},
-      {path:"/createManga", element: <CreateManga/>},
-      {path:"/adminPanel", element: <AdminPanel/>},
+      {path:"/changeRol", element: <PrivateRoute><ChangeRol/></PrivateRoute>},
+      {path:"/newAuthor", element: <PrivateRoute><Author/></PrivateRoute>},
+      {path:"/newCompany", element: <PrivateRoute><Company/></PrivateRoute>},
+      {path:"/editChapter", element: <PrivateRoute><EditChapter/></PrivateRoute>},
+      {path:"/companyProfile", element: <PrivateRoute><CompanyProfile/></PrivateRoute>},
+      {path:"/editManga", element: <PrivateRoute><EditManga/></PrivateRoute>},
+      {path:"/authorProfile", element: <PrivateRoute><AuthorProfile/></PrivateRoute>},
+      {path:"/createChapter", element: <PrivateRoute><CreateChapter/></PrivateRoute>},
+      {path:"/createManga", element: <PrivateRoute><CreateManga/></PrivateRoute>},
+      {path:"/adminPanel", element: <PrivateRoute><AdminPanel/></PrivateRoute>},
       {path:"/lectura/:chapterId", element: <Lectura/>}
       
       //Aca iran el resto de las rutas que se vayan creando
