@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       {path:"/home", element: <Home/>},
       {path:"/manga", element: <Mangas/>},
       {path:"/mangaChapter/:id", element: <MangaChapter/>},
-      {path:"/Detailsmanga", element: <DetailsMangas/>},
+      {path:"/Detailsmanga/:id", element: <DetailsMangas/>},
       
       //Aca iran el resto de las rutas que se vayan creando
 
