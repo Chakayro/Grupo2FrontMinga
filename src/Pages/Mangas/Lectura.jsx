@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { useParams, useLocation } from 'react-router-dom';
+import logo1 from '../../assets/logo1.png';
+import logo2 from '../../assets/logo2.png';
 
 const PageWithLoader = ({ src, alt }) => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div className="w-[300px] h-[550px] relative overflow-hidden">
+    <div className="w-[340px] h-[440px] relative overflow-hidden">
       {/* Imagen */}
       <img
         src={src}
@@ -41,15 +43,24 @@ const ReaderPage = () => {
   }
 
   return (
+    
     <div className="min-h-screen bg-black flex items-center justify-center">
-      <div className="bg-white rounded-xl shadow-lg w-9/12 md:w-4/5 lg:w-3/5 h-[80vh] flex flex-col items-center justify-center">
+         {/* Info capítulo */}
+        <div className="absolute md:rotate-270 md:bottom-1/2 lg:left-20 md:left-10 md:scale-200 
+                                 rotate-0 bottom-5 scale-100">
+          <img src={logo2} className='w-25' alt="logo minga" />
+          <span className="text-sm text-gray-600">
+            Chapter {chapter.title}
+          </span>
+        </div>
+      <div className="bg-white rounded-xl shadow-lg w-9/12 md:w-3/6 lg:w-3/5 h-[73vh] lg:h-[88vh] md:h-[75vh] flex flex-col items-center justify-center">
 
         {/* FlipBook con escalado responsivo */}
         <HTMLFlipBook
-          width={300}
-          height={550}
+          width={330}
+          height={440}
           showCover={true}
-          className="scale-[0.80] sm:scale-[0.85] md:scale-[0.90] lg:scale-[0.95] transition-transform duration-300 ease-in-out mt-10"
+          className=" scale-[0.85] md:scale-[0.95] lg:scale-122 transition-transform duration-300 ease-in-out mt-10"
         >
           {chapter.pages.map((pageUrl, index) => (
             <div key={index}>
@@ -57,14 +68,8 @@ const ReaderPage = () => {
             </div>
           ))}
         </HTMLFlipBook>
-
-        {/* Info capítulo */}
-        <div className="flex justify-between w-full px-4 py-2 mt-4">
-          <h2 className="text-lg font-semibold text-gray-800">Manga</h2>
-          <span className="text-sm text-gray-600">
-            Chapter {chapter.title}
-          </span>
-        </div>
+          <div className='h-2 p-5'></div>
+       
       </div>
     </div>
   );
