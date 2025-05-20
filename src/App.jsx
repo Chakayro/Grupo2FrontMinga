@@ -16,7 +16,13 @@ import { useDispatch } from 'react-redux'
 import { setUser } from './store/actions/authAction'
 import Author from './Pages/Users/NewAuthor'
 import Company from './Pages/Users/NewCompany'
-
+import EditChapter from './Pages/Mangas/CRUD/EditChapter'
+import CompanyProfile from './Pages/Profile/Company/CompanyProfile'
+import EditManga from './Pages/Mangas/CRUD/EditManga'
+import AuthorProfile from './Pages/Profile/Author/AuthorProfile'
+import CreateChapter from './Pages/Mangas/CRUD/CreateChapter'
+import CreateManga from './Pages/Mangas/CRUD/CreateManga'
+import AdminPanel from './Pages/Users/Admin/AdminPanel'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +47,14 @@ const router = createBrowserRouter([
       {path:"/changeRol", element: <ChangeRol/>},
       {path:"/newAuthor", element: <Author/>},
       {path:"/newCompany", element: <Company/>},
+      {path:"/editChapter", element: <EditChapter/>},
+      {path:"/companyProfile", element: <CompanyProfile/>},
+      {path:"/editManga", element: <EditManga/>},
+      {path:"/authorProfile", element: <AuthorProfile/>},
+      {path:"/createChapter", element: <CreateChapter/>},
+      {path:"/createManga", element: <CreateManga/>},
+        {path:"/adminPanel", element: <AdminPanel/>}
+      
       //Aca iran el resto de las rutas que se vayan creando
     ]
   }
