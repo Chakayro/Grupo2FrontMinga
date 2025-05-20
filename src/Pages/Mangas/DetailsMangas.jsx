@@ -17,8 +17,17 @@ const DetailsMangas = () => {
   } = useSelector((state) => state.chapters);
   const { mangas } = useSelector((state) => state.mangas);
 
-  // Encontrar el manga correspondiente usando el id del useParams
-  const manga = mangas.find((m) => m._id === id);
+  // Encontrar el capítulo y el manga correspondientes
+  const chapter = chapters.find((ch) => ch._id === id);
+  const manga = mangas.find((m) =>
+    chapter ? m._id === chapter.manga_id : null
+  ); // Encuentra el manga basado en el manga_id del capítulo
+
+  console.log("Capitulo seleccionado:", chapter);
+  console.log("Manga seleccionado:", manga);
+  console.log('manga desde details', manga);
+  
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -87,11 +96,7 @@ const DetailsMangas = () => {
         </div>
         {/* Reacciones */}
         <ReactionButtons
-          counts={{ 1: 3, 2: 0, 3: 1, 4: 0 }}
-          onReact={(reactionId, action, count) => {
-            // Aquí puedes usar reactionId, action ("add"/"remove") y el nuevo count
-            // Por ejemplo: api.updateReaction(mangaId, reactionId, action, count)
-          }}
+          manga ={manga}
         />
         {/* Stats */}
         <div className="flex items-center justify-evenly bg-white rounded-xl px-6 py-3 mt-2">

@@ -13,7 +13,7 @@ async (
     
     const response = await axios.post(
         'http://localhost:8080/api/author/create',
-         dataAutor,
+        dataAutor,
         {
         headers: {
             Authorization: `Bearer ${token}`,
