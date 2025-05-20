@@ -12,7 +12,7 @@ const PageWithLoader = ({ src, alt }) => {
         src={src}
         alt={alt}
         onLoad={() => setLoading(false)}
-        className={`w-full h-full object-contain transition-opacity duration-300 ${
+        className={`w-full h-[full] object-contain transition-opacity duration-300 ${
           loading ? 'opacity-0' : 'opacity-100'
         }`}
       />
