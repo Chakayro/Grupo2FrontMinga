@@ -30,6 +30,7 @@ import CompanyProfile from './Pages/Profile/Company/CompanyProfile'
 import AuthorProfile from './Pages/Profile/Author/AuthorProfile'
 import CreateChapter from './pages/Mangas/CRUD/CreateChapter'
 import CreateManga from './pages/Mangas/CRUD/CreateManga'
+import Panel from './Pages//Panel'
 
 
 const router = createBrowserRouter([
@@ -53,11 +54,12 @@ const router = createBrowserRouter([
       {path:"/login", element: <PrivateRoute><Login/></PrivateRoute>},
       {path:"/register", element: <Register/>},
       {path:"/changeRol", element: <ChangeRol/>},
-      {path:"/newAuthor", element: <Author/>},
-      {path:"/newCompany", element: <Company/>},
+      // {path:"/newAuthor", element: <Author/>},
+      // {path:"/newCompany", element: <Company/>},
       //Aca iran el resto de las rutas que se vayan creando
     ]
   },
+  // vistas de chakayro
    {path: "/",
      element: <LayoutAnim/>,
     children: [
@@ -67,6 +69,9 @@ const router = createBrowserRouter([
       {path:"/AuthorProfile", element: <AuthorProfile/>},
       {path:"/createChapter", element: <CreateChapter/>},
       {path:"/createManga", element: <CreateManga/>},
+      {path:"/newAuthor", element: <Author/>},
+      { path:"/newCompany", element: <Company/>},
+      {path:"/panel", element: <Panel/>},
 
     ]
   }
