@@ -12,6 +12,8 @@ const [password, setPassword] = useState('');
 const dispatch = useDispatch();
 const navigate = useNavigate();
 const {status, error, message} = useSelector((state) => state.register);
+console.log("status", status);
+console.log("error", error);
 
 
 const handleSubmit = (e) => {

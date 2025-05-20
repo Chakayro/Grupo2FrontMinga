@@ -20,3 +20,5 @@ export const login = createAsyncThunk('auth/login', async({email, password},{rej
 export const setUser = createAction('auth/setUser')
 
 export const logout = createAction('auth/logout')
+
+

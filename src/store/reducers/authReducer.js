@@ -6,7 +6,8 @@ const initialState = {
 user: null,
 token: null,
 status: 'idle', //pending, success, success, failed
-error: null
+error: null,
+message: null
 }
 
 export const authReducer = createReducer(initialState, (builder) => {
@@ -15,26 +16,29 @@ export const authReducer = createReducer(initialState, (builder) => {
         state.error = null;
         state.user = null;
         state.token = null;
+        state.message = null;
     })
     builder.addCase(login.fulfilled, (state, action) => {
         state.status = 'success';
         state.user = action.payload.user;
         state.token = action.payload.token;
+        state.message = action.payload.message;
     })
     builder.addCase(login.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
         state.user = null;
         state.token = null;
+        state.message = null;
     })
     builder.addCase(setUser, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.status = 'success';
+        state.message = action.payload.message;
     })
-    builder.addCase(logout, (state) => {
-        state.user = null;
-        state.token = null;
-    })
+    builder.addCase(logout, () => {
+        return { ...initialState };
 
+    })
 })

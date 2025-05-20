@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import {useState } from 'react';
 import {login} from '../store/actions/authAction'
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 const SigIn = () => {
+const {status, error, message} = useSelector((state) => state.auth);
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const dispatch = useDispatch();
@@ -15,6 +17,8 @@ const handleSubmit = (e) => {
     console.log("se inicia la sesion de usuario");
     dispatch(login({email, password}));
 }
+
+
 
 return (
     <div className=" w-full md:w-1/2 h-screen flex justify-center items-center">
@@ -61,6 +65,19 @@ return (
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
             />
         </div>
+
+              { status ==='success' && (
+         <div className='text-red-500 text-sm'>  
+          <p>{message||'!Registro exitoso! Redirigiendo...'}</p>
+        </div>
+       )
+       }
+          { status ==='failed' && (
+         <div className='text-red-500 text-sm'>  
+          <p>{error|| 'Error al registrar'}</p>
+        </div>
+       )
+       }
 
         <button className="w-full py-2 bg-orange-500 text-white rounded-lg font-semibold hover:bg-orange-600 transition">
             Sign in
