@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import HTMLFlipBook from 'react-pageflip';
-import { useParams, useLocation } from 'react-router-dom';
-import logo1 from '../../assets/logo1.png';
+import {useLocation } from 'react-router-dom';
 import logo2 from '../../assets/logo2.png';
 
 const PageWithLoader = ({ src, alt }) => {
@@ -30,7 +29,6 @@ const PageWithLoader = ({ src, alt }) => {
 };
 
 const ReaderPage = () => {
-  const { chapterId } = useParams();
   const { state } = useLocation();
   const chapter = state?.chapter;
 
@@ -47,7 +45,7 @@ const ReaderPage = () => {
     <div className="min-h-screen bg-black flex items-center justify-center">
          {/* Info capítulo */}
         <div className="absolute md:rotate-270 md:bottom-1/2 lg:left-20 md:left-10 md:scale-200 
-                                 rotate-0 bottom-5 scale-100">
+        rotate-0 bottom-5 scale-100">
           <img src={logo2} className='w-25' alt="logo minga" />
           <span className="text-sm text-gray-600">
             Chapter {chapter.title}

@@ -9,7 +9,9 @@ export const register = createAsyncThunk('register/register', async ({email,phot
         
     } catch (error) {
     if(error.response){
-            return rejectWithValue(error.response.data.messages);
+       
+        
+            return rejectWithValue(error.response.data.message);
         }
         return rejectWithValue('register failed');
     }
