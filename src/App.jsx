@@ -54,8 +54,8 @@ const router = createBrowserRouter([
       {path:"/authorProfile", element: <AuthorProfile/>},
       {path:"/createChapter", element: <CreateChapter/>},
       {path:"/createManga", element: <CreateManga/>},
-        {path:"/adminPanel", element: <AdminPanel/>}
-        {path:"/lectura/:chapterId", element: <Lectura/>},
+      {path:"/adminPanel", element: <AdminPanel/>},
+      {path:"/lectura/:chapterId", element: <Lectura/>}
       
       //Aca iran el resto de las rutas que se vayan creando
     ]

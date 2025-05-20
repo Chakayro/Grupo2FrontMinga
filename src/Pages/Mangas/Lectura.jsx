@@ -49,7 +49,7 @@ const ReaderPage = () => {
           width={300}
           height={550}
           showCover={true}
-          className="scale-[0.85] sm:scale-[0.85] md:scale-[0.90] lg:scale-100 transition-transform duration-300 ease-in-out"
+          className="scale-[0.80] sm:scale-[0.85] md:scale-[0.90] lg:scale-[0.95] transition-transform duration-300 ease-in-out mt-10"
         >
           {chapter.pages.map((pageUrl, index) => (
             <div key={index}>
