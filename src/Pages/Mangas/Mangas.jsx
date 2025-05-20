@@ -15,7 +15,20 @@ const Mangas = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchText, setSearchText] = useState("");
   const [showNoResults, setShowNoResults] = useState(false);
+  // Filtrado cruzado por categoría y texto
+  const filteredMangas = mangas.filter((manga) => {
+    const matchesCategory =
+      selectedCategory === "all" ||
+      manga.category_id?.name?.toLowerCase() === selectedCategory;
 
+    // Filtro por texto (en título o descripción)
+    const matchesText =
+      manga.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      manga.description.toLowerCase().includes(searchText.toLowerCase());
+
+    // Ambos filtros deben cumplirse
+    return matchesCategory && matchesText;
+  });
   useEffect(() => {
   let timer;
   if (filteredMangas.length === 0) {
@@ -63,20 +76,7 @@ const Mangas = () => {
     }
   }, [dispatch, mangas]);
 
-  // Filtrado cruzado por categoría y texto
-  const filteredMangas = mangas.filter((manga) => {
-    const matchesCategory =
-      selectedCategory === "all" ||
-      manga.category_id?.name?.toLowerCase() === selectedCategory;
 
-    // Filtro por texto (en título o descripción)
-    const matchesText =
-      manga.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      manga.description.toLowerCase().includes(searchText.toLowerCase());
-
-    // Ambos filtros deben cumplirse
-    return matchesCategory && matchesText;
-  });
 
   return (
     <>

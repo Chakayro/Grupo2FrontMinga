@@ -21,6 +21,9 @@ const DetailsMangas = () => {
 
   console.log("Capitulo seleccionado:", chapter);
   console.log("Manga seleccionado:", manga);
+  console.log('manga desde details', manga);
+  
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -84,11 +87,7 @@ const DetailsMangas = () => {
         </div>
         {/* Reacciones */}
         <ReactionButtons
-          counts={{ 1: 3, 2: 0, 3: 1, 4: 0 }}
-          onReact={(reactionId, action, count) => {
-            // Aquí puedes usar reactionId, action ("add"/"remove") y el nuevo count
-            // Por ejemplo: api.updateReaction(mangaId, reactionId, action, count)
-          }}
+          manga ={manga}
         />
         {/* Stats */}
         <div className="flex items-center justify-evenly bg-white rounded-xl px-6 py-3 mt-2">

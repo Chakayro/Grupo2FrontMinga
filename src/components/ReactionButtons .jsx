@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
+import { useDispatch,useSelector } from "react-redux";
+import { createReaction } from "../store/actions/reactionAction";
+
+
 
 const reactions = [
   { id: 1, emoji: "👍", label: "Like" },
@@ -6,6 +10,7 @@ const reactions = [
   { id: 3, emoji: "😮", label: "Surprised" },
   { id: 4, emoji: "😍", label: "Love" },
 ];
+
 
 const baseStyle =
   "flex items-center justify-center w-14 h-14 rounded-full shadow bg-white transition-all duration-200 border border-gray-200 text-2xl focus:outline-none relative";
@@ -17,19 +22,29 @@ const badgeStyle =
   "absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center shadow";
 
 
-const ReactionButtons = ({ onReact, selected, counts = {} }) => {
-  const [active, setActive] = useState(selected || null);
-
+const ReactionButtons = ({ manga }) => {
+  const {data} = useSelector((state) => state.reaction);
+  console.log("data", data);
+  
+  const dispatch = useDispatch();
+  const mangaRecibido = manga
+  const mangaId = mangaRecibido._id  
+  const counts = mangaRecibido.reaction.reduce((acc, { id, count }) => {
+  acc[id] = count;
+  return acc;
+}, {});
+  const [active, setActive] = useState(null);
+  
   const handleClick = (id) => {
-    let newCount = counts[id] || 0;
     if (active === id) {
-      newCount = Math.max(0, newCount - 1);
       setActive(null);
-      if (onReact) onReact(id, "remove", newCount);
+      dispatch(createReaction({mangaId,reaction:id}))
+      ;
     } else {
-      newCount = newCount + 1;
       setActive(id);
-      if (onReact) onReact(id, "add", newCount);
+      dispatch(createReaction({mangaId,reaction:id}))
+
+      
     }
   };
 
