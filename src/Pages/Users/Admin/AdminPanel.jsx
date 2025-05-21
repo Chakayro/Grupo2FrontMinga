@@ -13,8 +13,17 @@ export default function Panel() {
           alt="Background"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl font-bold text-white">Panel</h1>
+        <div
+          className="
+            absolute
+            top-1/4
+            sm:top-1/3
+            inset-x-0
+            flex
+            justify-center
+          "
+        >
+          <h1 className="text-5xl font-bold text-white">Admin Panel</h1>
         </div>
       </div>
 
@@ -23,9 +32,7 @@ export default function Panel() {
         <div className="w-full flex flex-col items-center p-6">
           <h2 className="text-3xl font-bold text-orange-500 mb-1">Entities</h2>
           <div className="h-1 w-24 bg-orange-600 mb-6 rounded" />
-          
-            <TableComponent/>
-          
+          <TableComponent />
         </div>
       </div>
     </div>

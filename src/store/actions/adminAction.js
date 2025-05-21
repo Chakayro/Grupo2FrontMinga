@@ -38,3 +38,26 @@ export const fetchAdminPanel = createAsyncThunk(
     }
 );
 export const resetAdminPanel = createAction("admin/resetPanel");
+
+export const toggleUser = createAsyncThunk(
+    'admin/toggleUser',
+    async ({ typeUser, iduser }, { rejectWithValue }) => {
+        try {
+        const token = localStorage.getItem('token');
+        const response = await axios.post(
+            'http://localhost:8080/api/admin/desactive',
+            { typeUser, iduser },
+            { headers: { Authorization: `Bearer ${token}` } }
+        );
+        return { 
+            typeUser, 
+            iduser, 
+            active: response.data.active 
+        };
+        } catch (err) {
+        if (err.response) return rejectWithValue(err.response.data.message);
+        return rejectWithValue('Fail to toggle user');
+        }
+}
+);
+
