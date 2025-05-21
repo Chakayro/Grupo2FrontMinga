@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMangasByAuthorId } from "../../../store/actions/mangaAction"; 
+import { fetchMangasByAuthorId } from "../../../store/actions/mangaAction";
 import MangaImagen from "../../../components/MangaImagen";
 import BackgroundMangas from "../../../assets/mangasgeneral.png";
 import CategoryButton from "../../../components/CategoryButton";
@@ -11,11 +11,10 @@ import goku from "../../../assets/goku.png";
 const Mangas = () => {
   const dispatch = useDispatch();
 
-
   const authorMangas = useSelector((state) => state.mangas.authorMangas);
   const status = useSelector((state) => state.mangas.authorStatus);
   const error = useSelector((state) => state.mangas.authorError);
-  
+
   console.log("Estado de Redux (authorMangas):", authorMangas);
   console.log("Estado de Redux (status):", status);
   console.log("Estado de Redux (error):", error);
@@ -24,22 +23,43 @@ const Mangas = () => {
   const [searchText, setSearchText] = useState("");
   const [showNoResults, setShowNoResults] = useState(false);
 
-
-  // Esto previene errores si inicialmente es `null` o `undefined`.
-
   const mangasToUse = Array.isArray(authorMangas) ? authorMangas : [];
+
+  // --- CAMBIO AQUÍ: Lógica para obtener el nombre del autor o compañía ---
+  const entityName = (() => {
+    if (mangasToUse.length > 0) {
+      const firstManga = mangasToUse[0];
+
+      if (firstManga.author_id) {
+        const author = firstManga.author_id;
+        if (author.name && author.last_name) {
+          return `${author.name} ${author.last_name}`;
+        }
+        if (author.name) {
+          return author.name;
+        }
+      } else if (firstManga.company_id) { // <-- Nueva verificación para company_id
+        const company = firstManga.company_id;
+        if (company.name && company.last_name) { // Asumiendo que 'company' también podría tener 'name' y 'last_name'
+          return `${company.name} ${company.last_name}`;
+        }
+        if (company.name) { // Si solo tiene 'name'
+          return company.name;
+        }
+      }
+    }
+    return 'Mangas'; // Valor por defecto si no hay mangas o información de autor/compañía
+  })();
+  // --- FIN DEL CAMBIO ---
 
   // Filtrado cruzado por categoría y texto - AHORA USA `mangasToUse`
   const filteredMangas = mangasToUse.filter((manga) => {
-
     const matchesCategory =
       selectedCategory === "all" ||
       manga.category_id?.name?.toLowerCase() === selectedCategory;
 
-   
     const matchesText =
-      (manga.title?.toLowerCase() ?? '').includes(searchText.toLowerCase())
-      
+      (manga.title?.toLowerCase() ?? '').includes(searchText.toLowerCase());
 
     return matchesCategory && matchesText;
   });
@@ -53,7 +73,7 @@ const Mangas = () => {
     } else {
       setShowNoResults(false);
     }
-    
+
     // Log para depuración
     console.log("Mangas filtrados (filteredMangas):", filteredMangas);
 
@@ -65,18 +85,16 @@ const Mangas = () => {
   const categoryNames = new Set();
 
   mangasToUse.forEach((manga) => {
-   
     const catName = manga.category_id?.name;
     const catColor = manga.category_id?.color;
     const catHover = manga.category_id?.hover;
 
-   
     if (catName && !categoryNames.has(catName.toLowerCase())) {
       apiCategories.push({
-        category_id: catName.toLowerCase(), 
-        label: catName,                     
-        color: catColor || "bg-gray-300",  
-        activeColor: catHover || "bg-gray-500", 
+        category_id: catName.toLowerCase(),
+        label: catName,
+        color: catColor || "bg-gray-300",
+        activeColor: catHover || "bg-gray-500",
       });
       categoryNames.add(catName.toLowerCase());
     }
@@ -94,12 +112,11 @@ const Mangas = () => {
   ];
 
   useEffect(() => {
-   
-    if (status === 'idle' || status === 'failed') { // Solo si no ha cargado o falló
-        console.log("Realizando dispatch de fetchMangasByAuthorId (sin ID).");
-        dispatch(fetchMangasByAuthorId()); // No se pasa authorId
+    if (status === 'idle' || status === 'failed') {
+      console.log("Realizando dispatch de fetchMangasByAuthorId (sin ID).");
+      dispatch(fetchMangasByAuthorId());
     }
-  }, [dispatch, status]); 
+  }, [dispatch, status]);
 
 
   return (
@@ -108,7 +125,7 @@ const Mangas = () => {
       <div className="bg-gray-100 h-[85vh]">
         <MangaImagen imagenFondo={BackgroundMangas}>
           <div className="absolute inset-0 flex flex-col items-center justify-start lg:justify-center translate-y-20 lg:-translate-y-25">
-            <h1 className="text-5xl font-bold text-white">Mangas</h1>
+            <h1 className="text-5xl font-bold text-white">{entityName}</h1> {/* <-- USAMOS entityName AQUÍ */}
             <input
               type="text"
               placeholder="🔍Find your manga here"
@@ -180,6 +197,7 @@ const Mangas = () => {
 };
 
 export default Mangas;
+
 
 <style>
   {`
