@@ -1,26 +1,27 @@
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
 export default function PrivateRoute({ children }) {
-    const token = useSelector((state) => state.auth.token);
-    
-   console.log("Token en el PrivateRoute: ", token);
-   
-    const location = useLocation();
+  const { token } = useSelector((state) => state.auth);
+  const location = useLocation();
 
-  // 1) Si no hay token y no estás ya en la ruta de login → ve a /login
-    if (!token && location.pathname !== "/login") {
+  // 1) Creamos un flag que se activa tras X ms
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setReady(true), 300); // <--- 300ms de espera
+    return () => clearTimeout(t);
+  }, []);
+
+  // 2) Mientras no esté “ready”, devolvemos null (no entra en ninguna redirección)
+  if (!ready) return null;
+
+  // 3) Al pasar el timeout, entra en tu lógica habitual:
+  if (!token && location.pathname !== "/login") {
     return <Navigate to="/login" replace />;
-    }
-
-  // 2) Si hay token y estás en /login → ve a /home
-    if (token && location.pathname === "/login") {
+  }
+  if (token && location.pathname === "/login") {
     return <Navigate to="/home" replace />;
-    }
-
-  // 3) En cualquier otro caso (tienes token y no es /login,
-  //    o no tienes token pero sí estás ya en /login)
-  //    deja pasar a los children
-    return children;
+  }
+  return children;
 }
-

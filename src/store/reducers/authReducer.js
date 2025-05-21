@@ -34,7 +34,7 @@ export const authReducer = createReducer(initialState, (builder) => {
     builder.addCase(setUser, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;
-        state.status = 'success';
+        state.status = 'succes';
         state.message = action.payload.message;
     })
     builder.addCase(logout, () => {
