@@ -52,11 +52,11 @@ const router = createBrowserRouter([
       {path:"/changeRol", element: <PrivateRoute><ChangeRol/></PrivateRoute>},
       {path:"/newAuthor", element: <PrivateRoute><Author/></PrivateRoute>},
       {path:"/newCompany", element: <PrivateRoute><Company/></PrivateRoute>},
-      {path:"/editChapter", element: <PrivateRoute><EditChapter/></PrivateRoute>},
+      {path:"/editChapter/:id", element: <PrivateRoute><EditChapter/></PrivateRoute>},
       {path:"/companyProfile", element: <PrivateRoute><CompanyProfile/></PrivateRoute>},
       {path:"/editManga", element: <PrivateRoute><EditManga/></PrivateRoute>},
       {path:"/authorProfile", element: <PrivateRoute><AuthorProfile/></PrivateRoute>},
-      {path:"/createChapter", element: <PrivateRoute><CreateChapter/></PrivateRoute>},
+      {path:"/createChapter/:id", element: <PrivateRoute><CreateChapter/></PrivateRoute>},
       {path:"/createManga", element: <PrivateRoute><CreateManga/></PrivateRoute>},
       {path:"/adminPanel", element: <PrivateRoute><AdminPanel/></PrivateRoute>},
       {path:"/lectura/:chapterId", element: <Lectura/>}

@@ -49,7 +49,7 @@ const Navbar = () => {
     { name: 'Log Out',    path: null,           type: "auth"    },
     { name: 'Change Rol', path: '/changeRol',   type: "private" },
     { name: 'Mangas',     path: '/manga',       type: "public"  },
-    { name: 'Favorites',  path: '/favorites',   type: "private" },
+    { name: 'Favorites',  path: '/favorites',   type: "private" }
   ];
 
   return (
