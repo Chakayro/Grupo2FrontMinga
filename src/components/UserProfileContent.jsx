@@ -9,8 +9,8 @@ import UserLocationIcon from '../assets/location.png';
 import UserCakeIcon from '../assets/cake.png';
 
 const formInputClasses =
-  "w-full p-2 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-sm placeholder-gray-400";
-const buttonBase = "w-full font-semibold py-3 px-4 rounded-full transition-colors shadow-sm text-sm";
+  "w-full p-0.5 border-b-2 border-gray-300 focus:border-teal-500 bg-transparent focus:outline-none transition-colors text-xs placeholder-gray-400";
+const buttonBase = "w-full font-semibold py-2 px-4 rounded-full transition-colors shadow-sm text-sm";
 const saveButton = `${buttonBase} bg-teal-400 hover:bg-teal-500 text-white`;
 const deleteButton = `${buttonBase} bg-pink-100 hover:bg-pink-200 text-red-500`;
 
@@ -184,7 +184,7 @@ export default function UserProfileContent() {
     
   // Renderizado del formulario y detalles del perfil cuando el autor está cargado
   return (
-    <div className="w-full flex flex-col md:flex-row md:justify-around items-center gap-y-8 md:gap-x-12">
+    <div className="w-full flex flex-col md:flex-row md:justify-around items-center gap-y-8 md:gap-x-45">
       {/* Columna del perfil (imagen y detalles) */}
       <div className="w-full md:w-2/5 flex flex-col items-center order-1 md:order-2 md:pt-8">
         <img src={formData.photo || 'https://via.placeholder.com/96x96?text=No+Photo'} alt="Profile" className={`${profileImage} mb-2`} />
