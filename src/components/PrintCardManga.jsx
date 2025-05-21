@@ -58,7 +58,7 @@ const MangaCard = ({
         <Link
             to={`/Detailsmanga/${manga._id}`}
             state={{ mangaLocal: manga }}
-            className="w-[50%] flex items-center justify-center bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition mt-4 translate-y-20"
+            className="w-[50%] flex items-center justify-center bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition mt-4 translate-y-10"
           >
             Read
           </Link>
