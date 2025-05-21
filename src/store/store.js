@@ -7,6 +7,8 @@ import chaptersReducer from "./reducers/chapterMangaReducer.js";
 import { authorReducer } from '../store/reducers/authorReducer.js';
 import { companyReducer } from "./reducers/companyReducer.js";
 import { reactionReducer } from "./reducers/reactionReducer.js";
+import { adminReducer } from "./reducers/adminReducer.js";
+
 
 const store = configureStore({
   reducer: {
@@ -17,7 +19,8 @@ const store = configureStore({
     author: authorReducer,
     company: companyReducer,
     chat: chatReducer,
-    reaction: reactionReducer
+    reaction: reactionReducer,
+    admin: adminReducer
   }
 })
 

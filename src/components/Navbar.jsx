@@ -56,7 +56,7 @@ const Navbar = () => {
     <nav className="fixed top-0 w-full h-15 z-50">
       <div className="flex items-center justify-between px-4 py-3 h-full">
         {isOpen
-          ? <button className="text-2xl text-amber-50" onClick={() => setIsOpen(false)}><FaTimes/></button>
+          ? <button className="text-2xl text-amber-50 z-50" onClick={() => setIsOpen(false)}><FaTimes/></button>
           : <button className="text-orange-500 text-2xl" onClick={() => setIsOpen(true)}><FaBars/></button>
         }
         <img src={logo2} alt="logo" className="h-10"/>
