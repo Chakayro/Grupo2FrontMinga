@@ -88,8 +88,8 @@ export default function TableComponent() {
                     <span>{c.name}</span>
                   </div>
                 </td>
-                <td className={`${cell} text-gray-600`}>{c.website}</td>
-                <td className={cell}>
+                <td className={`${cell} hidden md:table-cell text-gray-600`}>{c.website}</td>
+                <td className={`${cell} hidden sm:table-cell ` }>
                   <img src={c.photo} className={logo} />
                 </td>
                 <td className={cell}>
@@ -115,8 +115,8 @@ export default function TableComponent() {
                     <span>{a.name}</span>
                   </div>
                 </td>
-                <td className={`${cell} text-gray-600`}>{a.city}</td>
-                <td className={`${cell} text-gray-600`}>{a.country}</td>
+                <td className={`${cell} hidden md:table-cell text-gray-600`}>{a.city}</td>
+                <td className={`${cell} hidden sm:table-cell`}>{a.country}</td>
                 <td className={cell}>
                   <img src={a.photo} className={logo} />
                 </td>
