@@ -27,7 +27,7 @@ const MangaCard = ({
   }; 
   return (
     <div
-      className="h-[25vh] w-[70vw] bg-white rounded-lg flex items-center shadow-md overflow-hidden 
+      className=" h-[25vh] w-[70vw] rounded-lg flex items-center shadow-md overflow-hidden 
                     md:h-[23vh] md:w-[40vw] lg:h-[30vh] lg:w-[35vw] xl:h-[35vh] 2xl:h-[34vh] 2xl:w-[33vw]"
     >
       {/* Barra de color vertical */}
@@ -60,12 +60,12 @@ const MangaCard = ({
             state={{ mangaLocal: manga }}
             className="w-[50%] flex items-center justify-center bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition mt-4 translate-y-10"
           >
-            Read
+            Edit
           </Link>
 
         </div>
         {/* Contenedor de la imagen */}
-        <div className="h-full w-[50%] overflow-hidden rounded-l-full flex items-center justify-end">
+        <div className="bg-red-200 h-full w-[50%] overflow-hidden rounded-l-full flex items-center justify-end">
           <img
             src={cover_photo || manga.cover_photo}
             alt={title || manga.title}

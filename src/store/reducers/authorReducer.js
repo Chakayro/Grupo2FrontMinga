@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { createAuthor, resetAuthorCreation } from "../actions/authorAction";
+import { createAuthor, resetAuthorCreation, getAuthor } from "../actions/authorAction";
 
 const initialAuthorState = {
   author: null,   
@@ -7,6 +7,7 @@ const initialAuthorState = {
   message: null,
   error: null     
 };
+
 export const authorReducer = createReducer(initialAuthorState, (builder) => {
 builder
     .addCase(createAuthor.pending, (state) => {
@@ -26,6 +27,11 @@ builder
     state.author = null;
     state.message = null;
     })
+
+    .addCase(getAuthor.fulfilled , (state)=>{
+      state.status = "succeded"
+    })
+
     .addCase(resetAuthorCreation, () => {
     return { ...initialAuthorState };
     });

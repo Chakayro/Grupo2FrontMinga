@@ -7,6 +7,7 @@ import CategoryButton from "../../../components/CategoryButton";
 import MangaCard from "../../../components/PrintCardManga";
 import ChatBubble from "../../../components/ChatBubble";
 import goku from "../../../assets/goku.png";
+import { getAuthor } from "../../../store/actions/authorAction";
 
 const Mangas = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Mangas = () => {
   const authorMangas = useSelector((state) => state.mangas.authorMangas);
   const status = useSelector((state) => state.mangas.authorStatus);
   const error = useSelector((state) => state.mangas.authorError);
-  
+
   console.log("Estado de Redux (authorMangas):", authorMangas);
   console.log("Estado de Redux (status):", status);
   console.log("Estado de Redux (error):", error);
@@ -102,13 +103,17 @@ const Mangas = () => {
   }, [dispatch, status]); 
 
 
+  useEffect(()=>{
+    dispatch(getAuthor())
+  }, [])
+
   return (
     <>
       <ChatBubble />
       <div className="bg-gray-100 h-[85vh]">
         <MangaImagen imagenFondo={BackgroundMangas}>
           <div className="absolute inset-0 flex flex-col items-center justify-start lg:justify-center translate-y-20 lg:-translate-y-25">
-            <h1 className="text-5xl font-bold text-white">Mangas</h1>
+            <h1 className="text-5xl font-bold text-white">{localStorage.getItem("nameauthor")} {localStorage.lastname}</h1>
             <input
               type="text"
               placeholder="🔍Find your manga here"
@@ -137,10 +142,6 @@ const Mangas = () => {
           </div>
           {status === "pending" && <div className="text-gray-600 font-semibold">Cargando mangas...</div>}
           {status === "failed" && <div className="text-red-600 font-semibold">Error al cargar mangas: {error}</div>}
-          {status === "succeeded" && filteredMangas.length === 0 && !showNoResults && (
-            <div className="text-gray-500">No se encontraron mangas para este autor.</div>
-          )}
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
             {filteredMangas.length > 0 ? (
               filteredMangas.map((manga) => (
