@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMangasByAuthorId } from "../../../store/actions/mangaAction";
 import MangaImagen from "../../../components/MangaImagen";
@@ -7,43 +7,17 @@ import CategoryButton from "../../../components/CategoryButton";
 import MangaCard from "../../../components/PrintCardManga";
 import ChatBubble from "../../../components/ChatBubble";
 import goku from "../../../assets/goku.png";
-import { fetchAllAuthors } from "../../../store/actions/authorAction.js";
-import { fetchAllCompanies } from "../../../store/actions/companyAction.js";
 
 const Mangas = () => {
   const dispatch = useDispatch();
 
-  const role = useSelector((state) => state?.auth?.user?.role);
-  const author = useSelector((state) => state?.author?.authors?.authors);
-  const company = useSelector((state) => state?.company?.companies);
-  const idUser = useSelector((state) => state?.auth?.user?.id);
-
-  useEffect(() => {
-    if (role === 1) {
-      dispatch(fetchAllAuthors());
-    } else if (role === 2) {
-      dispatch(fetchAllCompanies());
-    }
-  }, [dispatch, role]);
-
-  // Evito errores forzando arrays
-  const authorArray = Array.isArray(author) ? author : []
-  const companyArray = Array.isArray(company) ? company : []
-
-  // Memoriza filteredUser para que no recalcule innecesariamente
-  const filteredUser = useMemo(() => {
-    if (role === 1) {
-      return authorArray.filter((user) => user.user_id === idUser);
-    } else if (role === 2) {
-      return companyArray.filter((user) => user.user_id === idUser);
-    } else {
-      return [];
-    }
-  }, [role, authorArray, companyArray, idUser]);
-
   const authorMangas = useSelector((state) => state.mangas.authorMangas);
   const status = useSelector((state) => state.mangas.authorStatus);
   const error = useSelector((state) => state.mangas.authorError);
+
+  console.log("Estado de Redux (authorMangas):", authorMangas);
+  console.log("Estado de Redux (status):", status);
+  console.log("Estado de Redux (error):", error);
 
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchText, setSearchText] = useState("");
@@ -51,66 +25,99 @@ const Mangas = () => {
 
   const mangasToUse = Array.isArray(authorMangas) ? authorMangas : [];
 
-  // Memoriza el filtro de mangas
-  const filteredMangas = useMemo(() => {
-    return mangasToUse.filter((manga) => {
-      const matchesCategory =
-        selectedCategory === "all" ||
-        manga.category_id?.name?.toLowerCase() === selectedCategory;
+  // --- CAMBIO AQUÍ: Lógica para obtener el nombre del autor o compañía ---
+  const entityName = (() => {
+    if (mangasToUse.length > 0) {
+      const firstManga = mangasToUse[0];
 
-      const matchesText = (manga.title?.toLowerCase() ?? "").includes(searchText.toLowerCase());
+      if (firstManga.author_id) {
+        const author = firstManga.author_id;
+        if (author.name && author.last_name) {
+          return ${author.name} ${author.last_name};
+        }
+        if (author.name) {
+          return author.name;
+        }
+      } else if (firstManga.company_id) { // <-- Nueva verificación para company_id
+        const company = firstManga.company_id;
+        if (company.name && company.last_name) { // Asumiendo que 'company' también podría tener 'name' y 'last_name'
+          return ${company.name} ${company.last_name};
+        }
+        if (company.name) { // Si solo tiene 'name'
+          return company.name;
+        }
+      }
+    }
+    return 'Mangas'; // Valor por defecto si no hay mangas o información de autor/compañía
+  })();
+  // --- FIN DEL CAMBIO ---
 
-      return matchesCategory && matchesText;
-    });
-  }, [mangasToUse, selectedCategory, searchText]);
+  // Filtrado cruzado por categoría y texto - AHORA USA mangasToUse
+  const filteredMangas = mangasToUse.filter((manga) => {
+    const matchesCategory =
+      selectedCategory === "all" ||
+      manga.category_id?.name?.toLowerCase() === selectedCategory;
+
+    const matchesText =
+      (manga.title?.toLowerCase() ?? '').includes(searchText.toLowerCase());
+
+    return matchesCategory && matchesText;
+  });
 
   useEffect(() => {
     let timer;
     if (filteredMangas.length === 0) {
-      timer = setTimeout(() => setShowNoResults(true), 400);
+      timer = setTimeout(() => {
+        setShowNoResults(true);
+      }, 1000); // 1000ms = 1 segundo de delay
     } else {
       setShowNoResults(false);
     }
+
+    // Log para depuración
+    console.log("Mangas filtrados (filteredMangas):", filteredMangas);
+
     return () => clearTimeout(timer);
-  }, [filteredMangas]);
+  }, [filteredMangas.length]);
 
-  // Genera las categorías únicas a partir de mangasToUse
-  const categories = useMemo(() => {
-    const apiCategories = [];
-    const categoryNames = new Set();
+  // Extraer categorías únicas de los mangas - AHORA USA mangasToUse
+  const apiCategories = [];
+  const categoryNames = new Set();
 
-    mangasToUse.forEach((manga) => {
-      const catName = manga.category_id?.name;
-      const catColor = manga.category_id?.color;
-      const catHover = manga.category_id?.hover;
+  mangasToUse.forEach((manga) => {
+    const catName = manga.category_id?.name;
+    const catColor = manga.category_id?.color;
+    const catHover = manga.category_id?.hover;
 
-      if (catName && !categoryNames.has(catName.toLowerCase())) {
-        apiCategories.push({
-          category_id: catName.toLowerCase(),
-          label: catName,
-          color: catColor || "bg-gray-300",
-          activeColor: catHover || "bg-gray-500",
-        });
-        categoryNames.add(catName.toLowerCase());
-      }
-    });
+    if (catName && !categoryNames.has(catName.toLowerCase())) {
+      apiCategories.push({
+        category_id: catName.toLowerCase(),
+        label: catName,
+        color: catColor || "bg-gray-300",
+        activeColor: catHover || "bg-gray-500",
+      });
+      categoryNames.add(catName.toLowerCase());
+    }
+  });
 
-    return [
-      {
-        category_id: "all",
-        label: "All",
-        color: "bg-gray-300",
-        activeColor: "bg-gray-500",
-      },
-      ...apiCategories,
-    ];
-  }, [mangasToUse]);
+  // Agrega la opción "All" al principio
+  const categories = [
+    {
+      category_id: "all",
+      label: "All",
+      color: "bg-gray-300",
+      activeColor: "bg-gray-500",
+    },
+    ...apiCategories,
+  ];
 
   useEffect(() => {
-    if (status === "idle" || status === "failed") {
+    if (status === 'idle' || status === 'failed') {
+      console.log("Realizando dispatch de fetchMangasByAuthorId (sin ID).");
       dispatch(fetchMangasByAuthorId());
     }
   }, [dispatch, status]);
+
 
   return (
     <>
@@ -118,16 +125,7 @@ const Mangas = () => {
       <div className="bg-gray-100 h-[85vh]">
         <MangaImagen imagenFondo={BackgroundMangas}>
           <div className="absolute inset-0 flex flex-col items-center justify-start lg:justify-center translate-y-20 lg:-translate-y-25">
-            {role === 1 ? (
-              <h1 className="text-5xl font-bold text-white">
-                Author: {filteredUser[0]?.name ?? "Unknown"} {filteredUser[0]?.last_name ?? ""}
-              </h1>
-            ) : (
-              <h1 className="text-5xl font-bold text-white">
-                Company: {filteredUser[0]?.name ?? "Unknown"}
-              </h1>
-            )}
-
+            <h1 className="text-5xl font-bold text-white">{entityName}</h1> {/* <-- USAMOS entityName AQUÍ */}
             <input
               type="text"
               placeholder="🔍Find your manga here"
@@ -154,7 +152,6 @@ const Mangas = () => {
               />
             ))}
           </div>
-
           {status === "pending" && <div className="text-gray-600 font-semibold">Cargando mangas...</div>}
           {status === "failed" && <div className="text-red-600 font-semibold">Error al cargar mangas: {error}</div>}
           {status === "succeeded" && filteredMangas.length === 0 && !showNoResults && (
@@ -178,11 +175,15 @@ const Mangas = () => {
               showNoResults && filteredMangas.length === 0 && (
                 <div className="text-center px-4 bg-white rounded-lg shadow-md col-span-full">
                   <div className="w-64 h-64 mx-auto rounded-xl">
-                    <img src={goku} alt="Goku fixing a robot" className="w-full h-full object-contain" />
+                    <img
+                      src={goku}
+                      alt="Goku fixing a robot"
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <p className="my-4 text-lg font-semibold text-gray-700 p-2">
                     Goku couldn’t find the manga…
-                    <br />
+                    <br></br>
                     Maybe it’s hiding with Shenron!
                   </p>
                 </div>
@@ -196,3 +197,13 @@ const Mangas = () => {
 };
 
 export default Mangas;
+
+
+<style>
+  {`
+.fade-to-bg {
+  -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+}
+`}
+</style>
