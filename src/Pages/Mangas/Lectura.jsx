@@ -41,7 +41,7 @@ const ReaderPage = () => {
   }
 
   return (
-    
+    <>
     <div className="min-h-screen bg-black flex items-center justify-center">
          {/* Info capítulo */}
         <div className="absolute md:rotate-270 md:bottom-1/2 lg:left-20 md:left-10 md:scale-200 
@@ -67,9 +67,9 @@ const ReaderPage = () => {
           ))}
         </HTMLFlipBook>
           <div className='h-2 p-5'></div>
-       
       </div>
     </div>
+     </>
   );
 };
 
