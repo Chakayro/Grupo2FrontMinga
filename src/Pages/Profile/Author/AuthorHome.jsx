@@ -151,6 +151,7 @@ const Mangas = () => {
                   cover_photo={manga.cover_photo}
                   categories={categories}
                   category_id={manga.category_id?.name?.toLowerCase()}
+                  showActions={true}
                 />
               ))
             ) : (
