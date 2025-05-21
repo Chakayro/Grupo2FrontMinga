@@ -27,18 +27,15 @@ export default function TableComponent() {
   const dispatch = useDispatch();
   const { authors, companies, status, error } = useSelector(s => s.admin);
 
-  // **Estado local** para renderizado inmediato
   const [localAuthors, setLocalAuthors]     = useState([]);
   const [localCompanies, setLocalCompanies] = useState([]);
   const [tab, setTab]                       = useState('companies');
 
-  // Al montar: traer panel y poblar estado local
   useEffect(() => {
     dispatch(fetchAdminPanel());
     return () => { dispatch(resetAdminPanel()); };
   }, [dispatch]);
 
-  // Cuando cambie el store, sincronizar el local
   useEffect(() => {
     if (status === 'succeeded') {
       setLocalAuthors(authors);
@@ -46,11 +43,10 @@ export default function TableComponent() {
     }
   }, [status, authors, companies]);
 
-  if (status === 'pending') return <div>Cargando...</div>;
-  if (status === 'failed')  return <div>Error: {error}</div>;
+  if (status === 'pending') return <div className="p-4 text-center">Cargando...</div>;
+  if (status === 'failed')  return <div className="p-4 text-red-500">Error: {error}</div>;
 
   const handleToggle = (typeUser, iduser) => {
-    // 1) Optimistically actualizo UI local
     if (typeUser === 'company_id') {
       setLocalCompanies(comps =>
         comps.map(c => c._id === iduser ? { ...c, active: !c.active } : c)
@@ -60,77 +56,90 @@ export default function TableComponent() {
         aus.map(a => a._id === iduser ? { ...a, active: !a.active } : a)
       );
     }
-    // 2) Despacho la acción al backend (el store también se actualizará cuando llegue la respuesta)
     dispatch(toggleUser({ typeUser, iduser }));
   };
 
   return (
-    <div className="max-w-3xl mx-auto bg-white rounded shadow p-4">
-      <div className="flex mb-4">
+    <div className="mx-auto bg-white rounded shadow py-4 px-2 max-w-3xl">
+      {/* Pestañas centradas y ancho fijo */}
+      <div className="flex mb-4 w-full max-w-xs mx-auto">
         <button
-          className={`flex-1 py-2 ${tab==='companies'? 'bg-orange-500 text-white':'text-orange-500'}`}
-          onClick={()=>setTab('companies')}
-        >Companies</button>
+          className={`flex-1 text-center py-2 rounded-l ${
+            tab === 'companies'
+              ? 'bg-orange-500 text-white'
+              : 'bg-gray-100 text-gray-700'
+          }`}
+          onClick={() => setTab('companies')}
+        >
+          Companies
+        </button>
         <button
-          className={`flex-1 py-2 ${tab==='authors'? 'bg-orange-500 text-white':'text-orange-500'}`}
-          onClick={()=>setTab('authors')}
-        >Authors</button>
+          className={`flex-1 text-center py-2 rounded-r ${
+            tab === 'authors'
+              ? 'bg-orange-500 text-white'
+              : 'bg-gray-100 text-gray-700'
+          }`}
+          onClick={() => setTab('authors')}
+        >
+          Authors
+        </button>
       </div>
 
-      {tab === 'companies' && (
-        <table className="w-full divide-y divide-gray-200">
+      {/* Scroll horizontal en móvil, ancho mínimo para tablas */}
+      <div className="overflow-x-auto">
+        <table className="min-w-[300px] w-full divide-y divide-gray-200">
           <tbody className="bg-white divide-y divide-gray-200">
-            {localCompanies.map(c => (
-              <tr key={c._id} className="hover:bg-gray-50">
+            {(tab === 'companies' ? localCompanies : localAuthors).map(item => (
+              <tr key={item._id} className="hover:bg-gray-50">
                 <td className={cell}>
                   <div className="flex items-center">
-                    <img src={usersIcon} className={icon} />
-                    <span>{c.name}</span>
+                    <img src={usersIcon} className={icon} alt="icon" />
+                    <span>{item.name}</span>
                   </div>
                 </td>
-                <td className={`${cell} hidden md:table-cell text-gray-600`}>{c.website}</td>
-                <td className={`${cell} hidden sm:table-cell ` }>
-                  <img src={c.photo} className={logo} />
-                </td>
-                <td className={cell}>
-                  <ToggleSwitch
-                      enabled={c.active}         
-                      onToggle={()=>handleToggle('company_id',c._id)}
-                    />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
 
-      {tab === 'authors' && (
-        <table className="w-full divide-y divide-gray-200">
-          <tbody className="bg-white divide-y divide-gray-200">
-            {localAuthors.map(a => (
-              <tr key={a._id} className="hover:bg-gray-50">
-                <td className={cell}>
-                  <div className="flex items-center">
-                    <img src={usersIcon} className={icon} />
-                    <span>{a.name}</span>
-                  </div>
+                {/* En md+ muestro las columnas extra en orden */}
+                {tab === 'companies' ? (
+                  <>
+                    <td className={`${cell} hidden md:table-cell text-gray-600`}>
+                      {item.website}
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    <td className={`${cell} hidden md:table-cell text-gray-600`}>
+                      {item.city}
+                    </td>
+                    <td className={`${cell} hidden md:table-cell text-gray-600`}>
+                      {item.country}
+                    </td>
+                  </>
+                )}
+
+                <td className={`${cell} hidden md:table-cell`}>
+                  <img
+                    src={tab === 'companies' ? item.photo : item.photo}
+                    className={logo}
+                    alt="avatar/logo"
+                  />
                 </td>
-                <td className={`${cell} hidden md:table-cell text-gray-600`}>{a.city}</td>
-                <td className={`${cell} hidden sm:table-cell`}>{a.country}</td>
-                <td className={cell}>
-                  <img src={a.photo} className={logo} />
-                </td>
+
                 <td className={cell}>
                   <ToggleSwitch
-                    enabled={a.active}
-                    onToggle={()=>handleToggle('author_id',a._id)}
+                    enabled={item.active}
+                    onToggle={() =>
+                      handleToggle(
+                        tab === 'companies' ? 'company_id' : 'author_id',
+                        item._id
+                      )
+                    }
                   />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      )}
+      </div>
     </div>
   );
 }
