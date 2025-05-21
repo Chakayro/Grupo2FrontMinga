@@ -17,8 +17,8 @@ export const fetchMangaById = createAsyncThunk(
   "manga/fetchById",
   async (id, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`http://localhost:8080/api/manga/read/${id}`);
-      return data.response;   // asume que tu backend devuelve { manga: {…} }
+      const response  = await axios.get(`http://localhost:8080/api/manga/read/${id}`);
+      return response.data.response;   // asume que tu backend devuelve { manga: {…} }
     } catch (error) {
       return rejectWithValue(error.response?.data || "Fetch failed");
     }

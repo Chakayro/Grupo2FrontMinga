@@ -21,12 +21,12 @@ export default function NewChapterPage() {
   const [formData, setFormData] = useState({
     title: '',
     order: '',
-    pages: []  // Cambiado a array ya que probablemente el schema lo requiera así
+    pages: [] 
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Convertir pages a array si es necesario
+
     if (name === 'pages') {
       setFormData(prev => ({ 
         ...prev, 
@@ -39,7 +39,7 @@ export default function NewChapterPage() {
 
   const handleSubmit = async () => {
     try {
-      // Validación básica de campos vacíos
+      
       if (!formData.title || !formData.order || !formData.pages.length) {
         throw new Error('All fields are required');
       }
@@ -52,11 +52,11 @@ export default function NewChapterPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Añadir el token en el header
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({
           title: formData.title,
-          order: Number(formData.order), // Asegurarse que order sea número
+          order: Number(formData.order),
           pages: formData.pages
         })
       });
@@ -69,7 +69,7 @@ export default function NewChapterPage() {
       const data = await response.json();
       console.log('Chapter created:', data);
       setError(null);
-      // Limpiar el formulario
+
       setFormData({
         title: '',
         order: '',

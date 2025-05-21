@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       {path:"/newCompany", element: <PrivateRoute><Company/></PrivateRoute>},
       {path:"/editChapter/:id", element: <PrivateRoute><EditChapter/></PrivateRoute>},
       {path:"/companyProfile", element: <PrivateRoute><CompanyProfile/></PrivateRoute>},
-      {path:"/editManga", element: <PrivateRoute><EditManga/></PrivateRoute>},
+      {path:"/editManga/:id", element: <PrivateRoute><EditManga/></PrivateRoute>},
       {path:"/authorProfile", element: <PrivateRoute><AuthorProfile/></PrivateRoute>},
       {path:"/createChapter/:id", element: <PrivateRoute><CreateChapter/></PrivateRoute>},
       {path:"/createManga", element: <PrivateRoute><CreateManga/></PrivateRoute>},
