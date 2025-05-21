@@ -49,9 +49,7 @@ const Navbar = () => {
     { name: 'Log Out',    path: null,           type: "auth"    },
     { name: 'Change Rol', path: '/changeRol',   type: "private" },
     { name: 'Mangas',     path: '/manga',       type: "public"  },
-    { name: 'Favorites',  path: '/favorites',   type: "private" },
-    { name: 'Edit Chapter',  path: '/editChapter/682b42a63add79bd02418995',   type: "public" },
-
+    { name: 'Favorites',  path: '/favorites',   type: "private" }
   ];
 
   return (
