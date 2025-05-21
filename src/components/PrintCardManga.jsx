@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 // Recibe props individuales para máxima reutilización
 const MangaCard = ({
   title,
-  description,
   cover_photo,
   categories,
   category_id,
@@ -41,31 +40,25 @@ const MangaCard = ({
       <div className="flex-1 flex flex-row items-center pl-3 py-2 w-[95%]">
         <div className="flex-1 flex flex-col justify-between h-full text-left">
           <div>
-            <p className="text-md md:text-lg lg:text-xl font-semibold text-gray-900 line-clamp-2">
+            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-gray-900 line-clamp-2 my-2">
               {title || manga.title}
             </p>
-            {description !== undefined &&
-              description !== null &&
-              description !== "" && (
-                <p className="text-sm md:text-md lg:text-lg font-semibold text-gray-900 line-clamp-2">
-                  {description}
-                </p>
-              )}
+            
             <span
-              className={`text-xs md:text-sm lg:text-md font-medium mt-1`}
+              className={`text-sm md:text-sm lg:text-md font-medium `}
               style={
                 category?.color && category.color.startsWith("#")
                   ? { color: category.color }
                   : {}
               }
             >
-              {category?.category_id}
+              {category?.category_id} 
             </span>
           </div>
         <Link
             to={`/Detailsmanga/${manga._id}`}
             state={{ mangaLocal: manga }}
-            className="w-[50%] flex items-center justify-center bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition mt-4"
+            className="w-[50%] flex items-center justify-center bg-green-200 text-green-700 font-semibold px-8 py-3 rounded-full hover:bg-green-400 transition mt-4 translate-y-10"
           >
             Read
           </Link>

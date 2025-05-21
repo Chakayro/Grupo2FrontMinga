@@ -1,5 +1,9 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { fetchMangas, fetchMangaById } from "../actions/mangaAction";
+import {
+  fetchMangas,
+  fetchMangaById,
+  fetchMangasByAuthorId
+} from "../actions/mangaAction";
 
 export const statusTypes = {
   IDLE: "idle",
@@ -12,15 +16,19 @@ const initialState = {
   mangas: [],
   status: statusTypes.IDLE,
   error: null,
-  // detalle de un solo manga
+
   selectedManga: null,
   detailStatus: statusTypes.IDLE,
   detailError: null,
+
+  authorMangas: [],
+  authorStatus: statusTypes.IDLE,
+  authorError: null,
 };
 
 const mangasReducer = createReducer(initialState, (builder) => {
   builder
-    // listado de mangas
+    // Todos los mangas
     .addCase(fetchMangas.pending, (state) => {
       state.status = statusTypes.PENDING;
     })
@@ -32,7 +40,8 @@ const mangasReducer = createReducer(initialState, (builder) => {
       state.status = statusTypes.FAILED;
       state.error = action.payload;
     })
-    // detalle de manga por ID
+
+    // Manga por ID
     .addCase(fetchMangaById.pending, (state) => {
       state.detailStatus = statusTypes.PENDING;
       state.detailError = null;
@@ -44,6 +53,20 @@ const mangasReducer = createReducer(initialState, (builder) => {
     .addCase(fetchMangaById.rejected, (state, action) => {
       state.detailStatus = statusTypes.FAILED;
       state.detailError = action.payload;
+    })
+
+    // Mangas por autorId
+    .addCase(fetchMangasByAuthorId.pending, (state) => {
+      state.authorStatus = statusTypes.PENDING;
+      state.authorError = null;
+    })
+    .addCase(fetchMangasByAuthorId.fulfilled, (state, action) => {
+      state.authorMangas = action.payload;
+      state.authorStatus = statusTypes.SUCCEEDED;
+    })
+    .addCase(fetchMangasByAuthorId.rejected, (state, action) => {
+      state.authorStatus = statusTypes.FAILED;
+      state.authorError = action.payload;
     });
 });
 
