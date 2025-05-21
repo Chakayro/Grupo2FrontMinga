@@ -41,9 +41,7 @@ export const fetchMangasByAuthorId = createAsyncThunk(
           'Authorization': `Bearer ${token}` 
         }
       };
-      const response = await axios.get(`http://localhost:8080/api/manga/readEspecific`, config);
-      
-      console.log("Respuesta del nuevo endpoint (fetchMangasByAuthorId):", response.data);
+      const response = await axios.get(`http://localhost:8080/api/manga/readEspecific`, config)
       return response.data.response; 
     } catch (error) {
       console.error("Error al obtener mangas del autor:", error.response?.data?.message || error.message);
