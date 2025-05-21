@@ -21,11 +21,10 @@ const Mangas = () => {
       selectedCategory === "all" ||
       manga.category_id?.name?.toLowerCase() === selectedCategory;
 
-    // Filtro por texto (en título o descripción)
+    // Filtro por texto (en título )
     const matchesText =
-      manga.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      manga.description.toLowerCase().includes(searchText.toLowerCase());
-
+      manga.title.toLowerCase().includes(searchText.toLowerCase())
+      
     // Ambos filtros deben cumplirse
     return matchesCategory && matchesText;
   });
@@ -119,7 +118,6 @@ const Mangas = () => {
                 manga={manga}
                 key={manga._id}  // Agregamos la key aquí
                 title={manga.title}
-                description={manga.description}
                 cover_photo={manga.cover_photo}
                 categories={categories}
                 category_id={manga.category_id?.name?.toLowerCase()}

@@ -33,7 +33,7 @@ const MangaCarousel = ({ slides }) => {
         className="!overflow-visible"
       >
         {slides.map((manga, index) => (
-          <SwiperSlide key={manga.title || index} className="!overflow-visible">
+          <SwiperSlide key={manga.title + index} className="!overflow-visible">
             <div className="container-slide flex flex-col h-full w-full md:flex-row md:justify-center md:items-center lg:relative !overflow-visible">
               
               <div className="image-container h-full w-full flex items-center justify-center md:w-1/2 md:justify-end
