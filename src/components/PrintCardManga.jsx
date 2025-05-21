@@ -39,22 +39,20 @@ const MangaCard = ({
       {/* --- BOTONES SUPERIORES (Agregar/Editar Capítulo) - Condicional con showActions --- */}
       {showActions && ( // Se muestran SÓLO si showActions es true
         <div className="absolute top-2 left-2 flex ml-3 gap-2 z-10">
-          <button
-            onClick={() => alert(`Agregar capítulo al manga: ${manga._id}`)}  //onclick si vas a usar una funcion
-            //to={`/Detailsmanga/${manga._id}`} --->>cambia onclick por to path para redirigir a una pagina
+          <Link
+            to={`/createChapter/${manga._id}`}
             className="p-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
             title="Agregar Capítulo"
           >
             <FaPlus className="w-4 h-4" />
-          </button>
-          <button
-            onClick={() => alert(`Editar capítulo del manga: ${manga._id}`)}
-            //to={`/Detailsmanga/${manga._id}`} --->>cambia onclick por to path para redirigir a una pagina
+          </Link>
+          <Link
+            to={`/editChapter/${manga._id}`}
             className="p-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition"
             title="Editar Capítulo"
           >
             <FaPencilAlt className="w-4 h-4" />
-          </button>
+          </Link>
         </div>
       )}
       {/* --- FIN BOTONES SUPERIORES --- */}
@@ -84,7 +82,7 @@ const MangaCard = ({
             {showActions ? ( // Se muestran SÓLO si showActions es true
               <div className="flex flex-row gap-2">
                 <Link
-                  to={`/edit-manga/${manga._id}`}
+                  to={`/editManga/${manga._id}`}
                   className="flex-1 flex items-center justify-center bg-purple-200 text-purple-700 font-semibold px-2 py-1 rounded-full hover:bg-purple-300 transition text-sm md:text-base"
                 >
                   Editar

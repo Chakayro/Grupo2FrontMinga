@@ -9,6 +9,7 @@ import ChangeRol from './Pages/Users/ChangeRole'
 import PrivateRoute from './components/privateRouter'
 import Mangas from './Pages/Mangas/Mangas'
 import MangaChapter from './Pages/Mangas/MangaChapter'
+import NewChapterPage from './Pages/Mangas/CRUD/CreateChapter'
 import DetailsMangas from './Pages/Mangas/DetailsMangas'
 import Lectura from './Pages/Mangas/Lectura'
 import axios from 'axios'
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
       {path:"/newCompany", element: <PrivateRoute><Company/></PrivateRoute>},
       {path:"/editChapter/:id", element: <PrivateRoute><EditChapter/></PrivateRoute>},
       {path:"/companyProfile", element: <PrivateRoute><CompanyProfile/></PrivateRoute>},
-      {path:"/editManga", element: <PrivateRoute><EditManga/></PrivateRoute>},
+      {path:"/editManga/:id", element: <PrivateRoute><EditManga/></PrivateRoute>},
       {path:"/authorProfile", element: <PrivateRoute><AuthorProfile/></PrivateRoute>},
       {path:"/createChapter/:id", element: <PrivateRoute><CreateChapter/></PrivateRoute>},
       {path:"/createManga", element: <PrivateRoute><CreateManga/></PrivateRoute>},
