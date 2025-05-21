@@ -24,3 +24,31 @@ export const fetchMangaById = createAsyncThunk(
     }
   }
 );
+
+
+
+export const fetchMangasByAuthorId = createAsyncThunk(
+  "mangas/fetchByAuthorId",
+  async (_, { rejectWithValue }) => { 
+    try {
+      
+      const token = localStorage.getItem('token'); 
+      if (!token) {
+        return rejectWithValue("No se encontró token de autenticación. Por favor, inicia sesión.");
+      }
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${token}` 
+        }
+      };
+      const response = await axios.get(`http://localhost:8080/api/manga/readEspecific`, config);
+      
+      console.log("Respuesta del nuevo endpoint (fetchMangasByAuthorId):", response.data);
+      return response.data.response; 
+    } catch (error) {
+      console.error("Error al obtener mangas del autor:", error.response?.data?.message || error.message);
+    
+      return rejectWithValue(error.response?.data?.message || "Error al obtener mangas del autor");
+    }
+  }
+);

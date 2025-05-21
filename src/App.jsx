@@ -24,6 +24,8 @@ import AuthorProfile from './Pages/Profile/Author/AuthorProfile'
 import CreateChapter from './Pages/Mangas/CRUD/CreateChapter'
 import CreateManga from './Pages/Mangas/CRUD/CreateManga'
 import AdminPanel from './Pages/Users/Admin/AdminPanel'
+import AutorHome from './Pages/Profile/Author/AuthorHome'
+
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,8 @@ const router = createBrowserRouter([
       {path:"/manga", element: <Mangas/>},
       {path:"/mangaChapter/:id", element: <MangaChapter/>},
       {path:"/Detailsmanga/:id", element: <DetailsMangas/>},
+      {path:"/AuthorCompany", element: <AutorHome/>},
+      
       
       //Aca iran el resto de las rutas que se vayan creando
 
