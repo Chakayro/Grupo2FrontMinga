@@ -58,7 +58,7 @@ const router = createBrowserRouter([
       {path:"/editManga/:id", element: <PrivateRoute><EditManga/></PrivateRoute>},
       {path:"/authorProfile", element: <PrivateRoute><AuthorProfile/></PrivateRoute>},
       {path:"/createChapter/:id", element: <PrivateRoute><CreateChapter/></PrivateRoute>},
-      {path:"/createManga", element: <PrivateRoute><CreateManga/></PrivateRoute>},
+      {path:"/create-manga", element: <PrivateRoute><CreateManga/></PrivateRoute>},
       {path:"/adminPanel", element: <PrivateRoute><AdminPanel/></PrivateRoute>},
       {path:"/lectura/:chapterId", element: <Lectura/>}
       

@@ -7,9 +7,11 @@ import CategoryButton from "../../../components/CategoryButton";
 import MangaCard from "../../../components/PrintCardManga";
 import ChatBubble from "../../../components/ChatBubble";
 import goku from "../../../assets/goku.png";
+import { useNavigate } from 'react-router-dom'; // Importamos useNavigate
 
 const Mangas = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Inicializamos navigate
 
   const authorMangas = useSelector((state) => state.mangas.authorMangas);
   const status = useSelector((state) => state.mangas.authorStatus);
@@ -25,7 +27,6 @@ const Mangas = () => {
 
   const mangasToUse = Array.isArray(authorMangas) ? authorMangas : [];
 
-  // --- CAMBIO AQUÍ: Lógica para obtener el nombre del autor o compañía ---
   const entityName = (() => {
     if (mangasToUse.length > 0) {
       const firstManga = mangasToUse[0];
@@ -38,21 +39,19 @@ const Mangas = () => {
         if (author.name) {
           return author.name;
         }
-      } else if (firstManga.company_id) { // <-- Nueva verificación para company_id
+      } else if (firstManga.company_id) {
         const company = firstManga.company_id;
-        if (company.name && company.last_name) { // Asumiendo que 'company' también podría tener 'name' y 'last_name'
+        if (company.name && company.last_name) {
           return `${company.name} ${company.last_name}`;
         }
-        if (company.name) { // Si solo tiene 'name'
+        if (company.name) {
           return company.name;
         }
       }
     }
-    return 'Mangas'; // Valor por defecto si no hay mangas o información de autor/compañía
+    return 'Mangas';
   })();
-  // --- FIN DEL CAMBIO ---
 
-  // Filtrado cruzado por categoría y texto - AHORA USA `mangasToUse`
   const filteredMangas = mangasToUse.filter((manga) => {
     const matchesCategory =
       selectedCategory === "all" ||
@@ -69,18 +68,16 @@ const Mangas = () => {
     if (filteredMangas.length === 0) {
       timer = setTimeout(() => {
         setShowNoResults(true);
-      }, 1000); // 1000ms = 1 segundo de delay
+      }, 1000);
     } else {
       setShowNoResults(false);
     }
 
-    // Log para depuración
     console.log("Mangas filtrados (filteredMangas):", filteredMangas);
 
     return () => clearTimeout(timer);
   }, [filteredMangas.length]);
 
-  // Extraer categorías únicas de los mangas - AHORA USA `mangasToUse`
   const apiCategories = [];
   const categoryNames = new Set();
 
@@ -100,7 +97,6 @@ const Mangas = () => {
     }
   });
 
-  // Agrega la opción "All" al principio
   const categories = [
     {
       category_id: "all",
@@ -118,6 +114,13 @@ const Mangas = () => {
     }
   }, [dispatch, status]);
 
+  // Función para manejar el clic en el botón "Add New Manga"
+  const handleAddNewManga = () => {
+    // Redirige al usuario a la ruta para crear un nuevo manga
+    // Debes reemplazar '/create-manga' con la ruta real de tu formulario de creación de manga
+    navigate('/create-manga');
+  };
+
 
   return (
     <>
@@ -125,7 +128,7 @@ const Mangas = () => {
       <div className="bg-gray-100 h-[85vh]">
         <MangaImagen imagenFondo={BackgroundMangas}>
           <div className="absolute inset-0 flex flex-col items-center justify-start lg:justify-center translate-y-20 lg:-translate-y-25">
-            <h1 className="text-5xl font-bold text-white">{entityName}</h1> {/* <-- USAMOS entityName AQUÍ */}
+            <h1 className="text-5xl font-bold text-white">{entityName}</h1>
             <input
               type="text"
               placeholder="🔍Find your manga here"
@@ -133,6 +136,13 @@ const Mangas = () => {
               onChange={(e) => setSearchText(e.target.value)}
               className="w-[73vw] max-w-4xl px-6 py-3 rounded-lg bg-white text-gray-700 text-lg shadow focus:outline-none translate-y-10 md:translate-y-10"
             />
+            {/* Botón para agregar nuevo manga */}
+            <button
+              onClick={handleAddNewManga}
+              className="mt-6 bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 translate-y-10 md:translate-y-10"
+            >
+              + Add New Manga
+            </button>
           </div>
         </MangaImagen>
       </div>
@@ -197,13 +207,3 @@ const Mangas = () => {
 };
 
 export default Mangas;
-
-
-<style>
-  {`
-.fade-to-bg {
-  -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-  mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-}
-`}
-</style>
