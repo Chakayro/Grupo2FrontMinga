@@ -34,7 +34,7 @@ const Mangas = () => {
   if (filteredMangas.length === 0) {
     timer = setTimeout(() => {
       setShowNoResults(true);
-    }, 1000); // 1000ms = 1 segundo de delay
+    }, 300);
   } else {
     setShowNoResults(false);
   }
@@ -119,7 +119,6 @@ const Mangas = () => {
                 manga={manga}
                 key={manga._id}  // Agregamos la key aquí
                 title={manga.title}
-                description={manga.description}
                 cover_photo={manga.cover_photo}
                 categories={categories}
                 category_id={manga.category_id?.name?.toLowerCase()}
@@ -156,13 +155,4 @@ const Mangas = () => {
 };
 
 export default Mangas;
-
-<style>
-  {`
-.fade-to-bg {
-  -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-  mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
-}
-`}
-</style>
 
